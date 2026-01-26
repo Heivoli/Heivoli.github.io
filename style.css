@@ -1,100 +1,44 @@
-/* RESET SIMPLE */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* BODY */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #121212;
-  color: #ffffff;
-  line-height: 1.5;
-  padding: 0 20px;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
 }
 
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-  background-color: #1a1a1a;
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-header .logo {
-  font-family: 'Courier New', monospace;
-  font-size: 1.5rem;
-  color: #00ffff;
+h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
 }
 
-header nav a {
-  color: #ffffff;
-  text-decoration: none;
-  margin-left: 20px;
-  transition: color 0.3s;
+form {
+    display: flex;
 }
 
-header nav a:hover {
-  color: #ff0080;
+input {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-right: none;
+    outline: none;
 }
 
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #00ffff, #ff0080);
-  color: #121212;
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    background-color: #ddd;
+    cursor: pointer;
 }
 
-.hero h1 {
-  font-family: 'Courier New', monospace;
-  font-size: 3rem;
-  margin-bottom: 20px;
+button:hover {
+    background-color: #ccc;
 }
-
-.hero p {
-  font-size: 1.2rem;
-}
-
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 50px 0;
-}
-
-.card {
-  background-color: #1a1a1a;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card img {
-  width: 100%;
-  display: block;
-}
-
-.card h3 {
-  font-family: 'Courier New', monospace;
-  color: #00ffff;
-  padding: 10px 20px 0;
-}
-
-.card p {
-  padding: 0 20px 10px;
-  font-size: 0.95rem;
-}
-
-.card a {
-  display: inline-block;
-  margin: 0 20px 20px;
-  color: #ff0080;
-  text
