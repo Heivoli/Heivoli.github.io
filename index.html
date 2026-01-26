@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
- <link rel="icon" href="https://i.postimg.cc/6psKRJ2w/HN-1-removebg-preview.png" type="image/png" sizes="32x32">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HN</title>
@@ -171,7 +170,59 @@
       display: block;
     }
 
-    /* Petite responsivité */
+    /* Art du mois : mise en page */
+    .art-feature {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .art-feature img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .art-meta {
+      color: var(--muted);
+    }
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .art-grid img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    /* Responsive adjustments for art */
+    @media (max-width: 900px) {
+      .art-feature {
+        grid-template-columns: 1fr;
+      }
+      .art-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .art-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Petite responsivité générale */
     @media (max-width: 800px) {
       .container {
         grid-template-columns: 1fr;
@@ -198,6 +249,7 @@
     <div class="tabs" role="tablist" aria-label="Navigation principale">
       <button class="tab" role="tab" aria-selected="false" data-page="home" id="tab-home">Accueil</button>
       <button class="tab" role="tab" aria-selected="true" data-page="about" id="tab-about">À propos</button>
+      <button class="tab" role="tab" aria-selected="false" data-page="art" id="tab-art">Art du mois</button>
       <button class="tab" role="tab" aria-selected="false" data-page="contact" id="tab-contact">Contact</button>
     </div>
   </header>
@@ -208,14 +260,14 @@
       <!-- Bannière AU-DESSUS du titre -->
       <div class="banner" aria-hidden="true"></div>
 
-      <!-- PAGES : Accueil / À propos / Contact -->
+      <!-- PAGES : Accueil / À propos / Art du mois / Contact -->
       <section id="page-home" class="page" tabindex="0" aria-labelledby="tab-home">
         <h1>Accueil</h1>
-        <p>Bienvenue sur Heivoli Network — ici, c'est la page d'accueil. Le site est actuellement en développement, de nombreuses fonctionnalités vont arriver.</p>
-        <p>Votre art pourrait être affiché ici, un sacré coup de pub pas vrai ? Des concours à venir serviront à élire le plus beau dessin sur un thème donné, alors sortez les stylos !</p>
+        <p>Bienvenue sur Heivoli Network — page d'accueil. Ici tu peux présenter les dernières actualités, nouveautés, ou un aperçu du site.</p>
+        <p>Exemple : sections, articles, galerie, etc.</p>
       </section>
 
-      <section id="page-about" class="page active" tabindex="0" aria-labelledby="tab-about">
+      <section id="page-about" class="page" tabindex="0" aria-labelledby="tab-about">
         <h1>À propos</h1>
         <p>Bienvenue sur Heivoli Network ! Un site d'art dit "internet".</p>
         <p>Le but : rapprocher fans et artistes dans un même endroit commun.</p>
@@ -227,14 +279,45 @@
         </div>
       </section>
 
+      <section id="page-art" class="page" tabindex="0" aria-labelledby="tab-art">
+        <h1>Art du mois</h1>
+
+        <!-- Section principale : oeuvre mise en avant -->
+        <div class="art-feature" aria-label="Oeuvre du mois">
+          <div class="art-image">
+            <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Œuvre du mois — Design sans titre (56)">
+          </div>
+          <aside class="art-meta" aria-hidden="false">
+            <h2 style="margin-top:0;color:#fff;">Œuvre du mois — Titre</h2>
+            <p><strong>Artiste :</strong> Nom de l'artiste</p>
+            <p><strong>Mois :</strong> Janvier 2026</p>
+            <p>Courte description de l'œuvre, contexte, techniques utilisées, liens ou crédits. Tu peux remplacer ces textes par les informations réelles de l'artiste.</p>
+            <p style="margin-top:12px;">
+              <a href="#" style="background:var(--accent); color:#fff; padding:8px 10px; border-radius:6px; text-decoration:none;">Voir l'artiste</a>
+            </p>
+          </aside>
+        </div>
+
+        <!-- Petite galerie avec d'autres images (clic peut être étendu) -->
+        <h2 style="color:#fff; font-size:16px; margin-bottom:8px;">Galerie</h2>
+        <div class="art-grid" aria-hidden="false">
+          <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Art 1">
+          <img src="https://via.placeholder.com/400x300?text=Art+2" alt="Art 2">
+          <img src="https://via.placeholder.com/400x300?text=Art+3" alt="Art 3">
+          <img src="https://via.placeholder.com/400x300?text=Art+4" alt="Art 4">
+          <img src="https://via.placeholder.com/400x300?text=Art+5" alt="Art 5">
+          <img src="https://via.placeholder.com/400x300?text=Art+6" alt="Art 6">
+        </div>
+      </section>
+
       <section id="page-contact" class="page" tabindex="0" aria-labelledby="tab-contact">
         <h1>Contact</h1>
         <p>Tu peux nous contacter via :</p>
         <ul>
-          <li>Discord : <a href="https://discord.gg/MQPCWJJkry" target="_blank" rel="noopener">Serveur Heivoli Network</a></li>
-          <li>Email : <a href="mailto:contact@heivoli-network.fr">contact@heivoli-network.fr</a></li>
+          <li>Discord : <a href="https://discord.gg/MQPCWJJkry" target="_blank" rel="noopener">Serveur Heivoli</a></li>
+          <li>Email : <a href="mailto:contact@heivoli.example">contact@heivoli.example</a></li>
         </ul>
-        <p>En cas de problème(s), contactez-nous, c'est gratuit ! Les délais de réponse peuvent durer un moment, dus au fait du manque de personnel. Nous nous excusons par avance.</p>
+        <p>Tu peux aussi proposer des collaborations ou partager ton travail.</p>
       </section>
 
     </div>
@@ -287,7 +370,7 @@
           setActive(page, false);
         });
 
-        // Activation via clavier (Enter / Space)
+        // Activation via clavier (Enter / Space) et navigation par flèches
         tab.addEventListener('keydown', (e) => {
           const idx = tabs.indexOf(tab);
           if (e.key === 'ArrowRight') {
@@ -315,9 +398,6 @@
       const saved = (function(){ try { return localStorage.getItem(PAGE_KEY); } catch(e){ return null; } })();
       const initial = saved || 'about';
       setActive(initial, false, false);
-
-      // Si l'utilisateur navigue via back/forward (optionnel), on pourrait gérer l'historique.
-      // Pour l'instant on se contente du localStorage.
     })();
   </script>
 </body>
