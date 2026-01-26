@@ -6,11 +6,20 @@
   <title>HN</title>
 
   <style>
+    :root{
+      --bg: #000;
+      --panel: #000;
+      --border: #222;
+      --text: #ddd;
+      --muted: #777;
+      --accent: #1f8cff;
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background-color: #000;
-      color: #ddd;
+      background-color: var(--bg);
+      color: var(--text);
     }
 
     a {
@@ -25,7 +34,7 @@
 
     header {
       padding: 15px;
-      border-bottom: 1px solid #222;
+      border-bottom: 1px solid var(--border);
       text-align: center;
     }
 
@@ -36,15 +45,44 @@
       margin-bottom: 5px;
     }
 
-    .nav {
+    /* Onglets / navigation principale (transformée en tablist) */
+    .tabs {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
+    .tab {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid transparent;
+      padding: 6px 10px;
+      border-radius: 6px;
       font-size: 13px;
+      cursor: pointer;
+    }
+
+    .tab:hover,
+    .tab:focus {
+      color: #fff;
+      outline: none;
+      border-color: rgba(255,255,255,0.06);
+    }
+
+    .tab[aria-selected="true"]{
+      color: #fff;
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.06);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
     }
 
     .banner {
       width: 100%;
       height: 220px;
       background: url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat;
-      border: 1px solid #222;
+      border: 1px solid var(--border);
       margin-bottom: 15px;
     }
 
@@ -58,11 +96,12 @@
     }
 
     .content {
-      background: #000;
-      border: 1px solid #222;
+      background: var(--panel);
+      border: 1px solid var(--border);
       padding: 15px;
       font-size: 14px;
       line-height: 1.6;
+      min-height: 320px;
     }
 
     .content h1 {
@@ -80,23 +119,72 @@
     .side img {
       width: 100%;
       height: auto;
-      border: 1px solid #222;
+      border: 1px solid var(--border);
       display: block;
     }
 
     footer {
-      border-top: 1px solid #222;
+      border-top: 1px solid var(--border);
       margin-top: 20px;
       padding: 10px 15px;
       font-size: 12px;
-      color: #777;
+      color: var(--muted);
       text-align: center;
     }
 
+    /* Style du bloc Discord déjà présent */
+    .discord-block {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .discord-title {
+      display:block;
+      font-size: 16px;
+      margin: 0;
+      color: #fff;
+    }
+
+    .discord-btn {
+      display: inline-block;
+      background: #5865F2;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .discord-btn:hover { filter: brightness(0.95); }
+
+    /* Pages (sections) : on montre seulement la page active */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Petite responsivité */
     @media (max-width: 800px) {
       .container {
         grid-template-columns: 1fr;
       }
+
+      .side {
+        order: 2;
+      }
+
+      .content {
+        order: 1;
+      }
+
+      .banner { height: 160px; }
     }
   </style>
 </head>
@@ -104,8 +192,12 @@
 
   <header>
     <div class="site-title">Heivoli Network</div>
-    <div class="nav">
-      <a href="#">Accueil</a> | <a href="#">À propos</a> | <a href="#">Contact</a>
+
+    <!-- Onglets : accessible (role="tablist") -->
+    <div class="tabs" role="tablist" aria-label="Navigation principale">
+      <button class="tab" role="tab" aria-selected="false" data-page="home" id="tab-home">Accueil</button>
+      <button class="tab" role="tab" aria-selected="true" data-page="about" id="tab-about">À propos</button>
+      <button class="tab" role="tab" aria-selected="false" data-page="contact" id="tab-contact">Contact</button>
     </div>
   </header>
 
@@ -113,20 +205,41 @@
 
     <div class="content">
       <!-- Bannière AU-DESSUS du titre -->
-      <div class="banner"></div>
+      <div class="banner" aria-hidden="true"></div>
 
-      <h1>À propos</h1>
-      <p>Bienvenue sur Heivoli Network ! Un site d'art dit "internet".</p>
-      <p>Le but, rapprocher fans et artistes dans un même endroit commun.</p>
-      <p>Site codé exclusivement par Heivoli.</p>
+      <!-- PAGES : Accueil / À propos / Contact -->
+      <section id="page-home" class="page" tabindex="0" aria-labelledby="tab-home">
+        <h1>Accueil</h1>
+        <p>Bienvenue sur Heivoli Network — page d'accueil. Ici tu peux présenter les dernières actualités, nouveautés, ou un aperçu du site.</p>
+        <p>Exemple : sections, articles, galerie, etc.</p>
+      </section>
 
-<div class="discord-block">
-<h2 class="discord-title">Serveur Discord</h2>
-<a class="discord-btn" href="https://discord.gg/MQPCWJJkry" target="_blank" rel="noopener">Rejoindre le serveur</a>
-</div>
-</div>
+      <section id="page-about" class="page active" tabindex="0" aria-labelledby="tab-about">
+        <h1>À propos</h1>
+        <p>Bienvenue sur Heivoli Network ! Un site d'art dit "internet".</p>
+        <p>Le but : rapprocher fans et artistes dans un même endroit commun.</p>
+        <p>Site codé exclusivement par Heivoli.</p>
+
+        <div class="discord-block">
+          <h2 class="discord-title">Serveur Discord</h2>
+          <a class="discord-btn" href="https://discord.gg/MQPCWJJkry" target="_blank" rel="noopener">Rejoindre le serveur</a>
+        </div>
+      </section>
+
+      <section id="page-contact" class="page" tabindex="0" aria-labelledby="tab-contact">
+        <h1>Contact</h1>
+        <p>Tu peux nous contacter via :</p>
+        <ul>
+          <li>Discord : <a href="https://discord.gg/MQPCWJJkry" target="_blank" rel="noopener">Serveur Heivoli</a></li>
+          <li>Email : <a href="mailto:contact@heivoli.example">contact@heivoli.example</a></li>
+        </ul>
+        <p>Tu peux aussi proposer des collaborations ou partager ton travail.</p>
+      </section>
+
+    </div>
+
     <div class="side">
-      <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png">
+      <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Visuel de présentation">
       <img src="https://via.placeholder.com/300x200" alt="Image 2">
     </div>
 
@@ -136,5 +249,75 @@
     © 2026
   </footer>
 
+  <script>
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.tab'));
+      const pages = tabs.map(t => document.getElementById('page-' + t.dataset.page));
+      const PAGE_KEY = 'hn-active-page';
+
+      function setActive(pageId, focusTab = true, save = true) {
+        // Met à jour les tabs
+        tabs.forEach(tab => {
+          const isActive = tab.dataset.page === pageId;
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          tab.tabIndex = isActive ? 0 : -1;
+        });
+
+        // Affiche la page correspondante
+        pages.forEach(p => {
+          if (!p) return;
+          p.classList.toggle('active', p.id === 'page-' + pageId);
+        });
+
+        if (focusTab) {
+          const activeTab = tabs.find(t => t.dataset.page === pageId);
+          if (activeTab) activeTab.focus();
+        }
+
+        if (save) {
+          try { localStorage.setItem(PAGE_KEY, pageId); } catch (e) {}
+        }
+      }
+
+      // Click sur onglet
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          const page = tab.dataset.page;
+          setActive(page, false);
+        });
+
+        // Activation via clavier (Enter / Space)
+        tab.addEventListener('keydown', (e) => {
+          const idx = tabs.indexOf(tab);
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            const next = tabs[(idx + 1) % tabs.length];
+            next.click();
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const prev = tabs[(idx - 1 + tabs.length) % tabs.length];
+            prev.click();
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            tabs[0].click();
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            tabs[tabs.length - 1].click();
+          } else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            tab.click();
+          }
+        });
+      });
+
+      // Initialisation : restaure l'onglet actif sauvegardé (sinon 'about')
+      const saved = (function(){ try { return localStorage.getItem(PAGE_KEY); } catch(e){ return null; } })();
+      const initial = saved || 'about';
+      setActive(initial, false, false);
+
+      // Si l'utilisateur navigue via back/forward (optionnel), on pourrait gérer l'historique.
+      // Pour l'instant on se contente du localStorage.
+    })();
+  </script>
 </body>
 </html>
