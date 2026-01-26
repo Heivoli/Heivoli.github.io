@@ -1,20 +1,115 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Simple Homepage</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>À propos de nous</title>
+
+  <!-- Page simple, statique, compatible GitHub Pages -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f2f2f2;
+      color: #111;
+    }
+
+    /* Bannière */
+    .banner {
+      width: 100%;
+      height: 260px;
+      background-image: url('https://via.placeholder.com/1600x400');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Layout principal */
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 15px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    /* Contenu texte */
+    .content {
+      background: #ffffff;
+      padding: 20px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .content h1 {
+      margin-top: 0;
+    }
+
+    /* Colonne images */
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .side img {
+      width: 100%;
+      height: auto;
+      display: block;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Mobile */
+    @media (max-width: 800px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Simple Site</h1>
+  <!-- Bannière -->
+  <div class="banner"></div>
 
-        <form>
-            <input type="text" placeholder="Recherche...">
-            <button type="submit">Go</button>
-        </form>
+  <!-- Contenu principal -->
+  <div class="container">
+
+    <!-- Texte À propos -->
+    <div class="content">
+      <h1>À propos de nous</h1>
+      <p>
+        Bienvenue sur notre site. Nous sommes une équipe passionnée par la création,
+        la simplicité et l’accès direct à l’information.
+      </p>
+      <p>
+        Notre objectif est de proposer un contenu clair, rapide et sans distraction,
+        dans l’esprit des sites ultra minimalistes.
+      </p>
+      <p>
+        Ce site est hébergé via <strong>GitHub Pages</strong> et fonctionne sans base de données,
+        sans framework, juste du HTML et du CSS.
+      </p>
     </div>
+
+    <!-- Images sur le côté -->
+    <div class="side">
+      <img src="https://via.placeholder.com/400x250" alt="Image latérale 1">
+      <img src="https://via.placeholder.com/400x250" alt="Image latérale 2">
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 — À propos de nous
+  </footer>
 
 </body>
 </html>
+
