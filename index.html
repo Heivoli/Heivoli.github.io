@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HN</title>
+<title>Heivoli Network</title>
 <style>
 :root{
   --bg:#000; --panel:#000; --border:#222; --text:#ddd; --muted:#777; --accent:#1f8cff;
@@ -89,13 +89,16 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
   </div>
 </header>
 
+<!-- Bannière commune -->
+<div class="banner" aria-hidden="true"></div>
+
 <div class="container">
   <div class="content">
 
     <!-- Accueil -->
     <section id="page-home" class="page active" tabindex="0">
       <h1>Bienvenue sur Heivoli Network</h1>
-      <p>Site communautaire pour partager vos créations.</p>
+      <p>Site communautaire pour partager vos créations et découvrir des artistes.</p>
     </section>
 
     <!-- À propos -->
@@ -107,8 +110,6 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
     <!-- Art du mois -->
     <section id="page-art" class="page" tabindex="0">
       <h1>Art du mois</h1>
-
-      <!-- Exemple featured -->
       <div class="art-feature">
         <img src="https://via.placeholder.com/500x300" alt="Art featured">
         <div class="art-meta">
@@ -116,8 +117,6 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
           <p>Par Artiste</p>
         </div>
       </div>
-
-      <!-- Grille -->
       <div class="art-grid">
         <img src="https://via.placeholder.com/150x140" alt="Art 1">
         <img src="https://via.placeholder.com/150x140" alt="Art 2">
@@ -144,9 +143,7 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
             <div id="oauth-form">
               <p class="muted">Connecte-toi avec Discord pour uploader des images sur le site.</p>
               <div class="form-row">
-                <button id="btn-discord" class="oauth-btn">
-                  Se connecter avec Discord
-                </button>
+                <button id="btn-discord" class="oauth-btn">Se connecter avec Discord</button>
               </div>
             </div>
             <div id="auth-status" class="muted" style="margin-top:8px;"></div>
@@ -202,7 +199,6 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 
 <footer>© 2026</footer>
 
-<!-- Firebase client SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
@@ -276,4 +272,3 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 </script>
 </body>
 </html>
-
