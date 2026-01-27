@@ -15,229 +15,56 @@
       --accent: #1f8cff;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-    }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background-color: var(--bg); color: var(--text); }
+    a { color: #aaa; text-decoration: none; }
+    a:hover { color: #fff; text-decoration: underline; }
+    header { padding: 15px; border-bottom: 1px solid var(--border); text-align: center; }
+    .site-title { font-size: 24px; font-weight: bold; color: #fff; margin-bottom: 5px; }
 
-    a {
-      color: #aaa;
-      text-decoration: none;
-    }
+    .tabs { display: inline-flex; gap: 8px; align-items: center; justify-content: center; margin-top: 6px; }
+    .tab { background: transparent; color: var(--muted); border: 1px solid transparent; padding: 6px 10px; border-radius: 6px; font-size: 13px; cursor: pointer; }
+    .tab:hover, .tab:focus { color: #fff; outline: none; border-color: rgba(255,255,255,0.06); }
+    .tab[aria-selected="true"]{ color: #fff; background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset; }
 
-    a:hover {
-      color: #fff;
-      text-decoration: underline;
-    }
+    .banner { width: 100%; height: 220px; background: url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat; border: 1px solid var(--border); margin-bottom: 15px; }
 
-    header {
-      padding: 15px;
-      border-bottom: 1px solid var(--border);
-      text-align: center;
-    }
+    .container { max-width: 1200px; margin: 15px auto; padding: 0 15px; display: grid; grid-template-columns: 3fr 1fr; gap: 15px; }
+    .content { background: var(--panel); border: 1px solid var(--border); padding: 15px; font-size: 14px; line-height: 1.6; min-height: 320px; }
+    .content h1 { font-size: 18px; margin-top: 0; color: #fff; }
 
-    .site-title {
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 5px;
-    }
+    .side { display: flex; flex-direction: column; gap: 15px; }
+    .side img { width: 100%; height: auto; border: 1px solid var(--border); display: block; }
 
-    /* Onglets / navigation principale (transformée en tablist) */
-    .tabs {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      justify-content: center;
-      margin-top: 6px;
-    }
+    footer { border-top: 1px solid var(--border); margin-top: 20px; padding: 10px 15px; font-size: 12px; color: var(--muted); text-align: center; }
 
-    .tab {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid transparent;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .tab:hover,
-    .tab:focus {
-      color: #fff;
-      outline: none;
-      border-color: rgba(255,255,255,0.06);
-    }
-
-    .tab[aria-selected="true"]{
-      color: #fff;
-      background: rgba(255,255,255,0.03);
-      border-color: rgba(255,255,255,0.06);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
-    }
-
-    .banner {
-      width: 100%;
-      height: 220px;
-      background: url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat;
-      border: 1px solid var(--border);
-      margin-bottom: 15px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 15px auto;
-      padding: 0 15px;
-      display: grid;
-      grid-template-columns: 3fr 1fr;
-      gap: 15px;
-    }
-
-    .content {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      padding: 15px;
-      font-size: 14px;
-      line-height: 1.6;
-      min-height: 320px;
-    }
-
-    .content h1 {
-      font-size: 18px;
-      margin-top: 0;
-      color: #fff;
-    }
-
-    .side {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .side img {
-      width: 100%;
-      height: auto;
-      border: 1px solid var(--border);
-      display: block;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      margin-top: 20px;
-      padding: 10px 15px;
-      font-size: 12px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    /* Style du bloc Discord déjà présent */
-    .discord-block {
-      margin-top: 16px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .discord-title {
-      display:block;
-      font-size: 16px;
-      margin: 0;
-      color: #fff;
-    }
-
-    .discord-btn {
-      display: inline-block;
-      background: #5865F2;
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
+    .discord-block { margin-top: 16px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .discord-title { display:block; font-size: 16px; margin: 0; color: #fff; }
+    .discord-btn { display: inline-block; background: #5865F2; color: #fff; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
     .discord-btn:hover { filter: brightness(0.95); }
 
-    /* Pages (sections) : on montre seulement la page active */
-    .page {
-      display: none;
-    }
+    .page { display: none; }
+    .page.active { display: block; }
 
-    .page.active {
-      display: block;
-    }
+    .art-feature { display: grid; grid-template-columns: 1fr 320px; gap: 16px; align-items: start; margin-bottom: 18px; }
+    .art-feature img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); display: block; }
+    .art-meta { color: var(--muted); }
 
-    /* Art du mois : mise en page */
-    .art-feature {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 16px;
-      align-items: start;
-      margin-bottom: 18px;
-    }
+    .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .art-grid img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); display: block; }
 
-    .art-feature img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      display: block;
-    }
+    /* Communauté styles */
+    .community { display: grid; grid-template-columns: 1fr 320px; gap: 16px; align-items: start; }
+    .card { background: #050505; border: 1px solid var(--border); padding: 12px; border-radius: 8px; }
+    .form-row { display:flex; gap:8px; margin-bottom:8px; }
+    input[type="text"], input[type="password"], input[type="file"] { width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); background:transparent; color:var(--text); }
+    button.primary { background:var(--accent); color:#fff; padding:8px 10px; border-radius:6px; border:none; cursor:pointer; }
+    button.secondary { background:transparent; color:#fff; padding:8px 10px; border-radius:6px; border:1px solid var(--border); cursor:pointer; }
+    .thumb { max-width:100%; border:1px solid var(--border); border-radius:6px; display:block; margin-top:8px; }
+    .muted { color:var(--muted); font-size:13px; }
 
-    .art-meta {
-      color: var(--muted);
-    }
-
-    .art-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .art-grid img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      display: block;
-    }
-
-    /* Responsive adjustments for art */
-    @media (max-width: 900px) {
-      .art-feature {
-        grid-template-columns: 1fr;
-      }
-      .art-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .art-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Petite responsivité générale */
-    @media (max-width: 800px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-
-      .side {
-        order: 2;
-      }
-
-      .content {
-        order: 1;
-      }
-
-      .banner { height: 160px; }
-    }
+    @media (max-width: 900px) { .art-feature { grid-template-columns: 1fr; } .art-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .art-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 800px) { .container { grid-template-columns: 1fr; } .side { order: 2; } .content { order: 1; } .banner { height: 160px; } .community { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -245,26 +72,24 @@
   <header>
     <div class="site-title">Heivoli Network</div>
 
-    <!-- Onglets : accessible (role="tablist") -->
     <div class="tabs" role="tablist" aria-label="Navigation principale">
       <button class="tab" role="tab" aria-selected="false" data-page="home" id="tab-home">Accueil</button>
       <button class="tab" role="tab" aria-selected="true" data-page="about" id="tab-about">À propos</button>
       <button class="tab" role="tab" aria-selected="false" data-page="art" id="tab-art">Art du mois</button>
       <button class="tab" role="tab" aria-selected="false" data-page="contact" id="tab-contact">Contact</button>
+      <button class="tab" role="tab" aria-selected="false" data-page="community" id="tab-community">Communauté</button>
     </div>
   </header>
 
   <div class="container">
 
     <div class="content">
-      <!-- Bannière AU-DESSUS du titre -->
       <div class="banner" aria-hidden="true"></div>
 
-      <!-- PAGES : Accueil / À propos / Art du mois / Contact -->
       <section id="page-home" class="page" tabindex="0" aria-labelledby="tab-home">
         <h1>Accueil</h1>
         <p>Bienvenue sur Heivoli Network — page d'accueil. Le site et serveur Discord Heivoli Network sont exclusivement dédiés à une communauté francophone.</p>
-        <p>Ici, tu trouveras un "agrandissement" du serveur Discord. En particulier avec les moyens de nous contacter, ainsi que la galerie d'un futur évènement mensuel, nommé "l'art du mois", et plein d'autres choses qui vont arriver prochainement ! </p>
+        <p>Ici, tu trouveras un "agrandissement" du serveur Discord. En particulier avec les moyens de nous contacter, ainsi que la galerie d'un futur évènement mensuel, nommé "l'art du mois".</p>
       </section>
 
       <section id="page-about" class="page" tabindex="0" aria-labelledby="tab-about">
@@ -281,11 +106,9 @@
 
       <section id="page-art" class="page" tabindex="0" aria-labelledby="tab-art">
         <h1>Art du mois</h1>
-
-        <!-- Section principale : oeuvre mise en avant -->
         <div class="art-feature" aria-label="Oeuvre du mois">
           <div class="art-image">
-            <img src="https://previews.123rf.com/images/peshkov/peshkov1605/peshkov160500266/57596280-businessman-with-question-mark-head-on-abstract-green-background.jpg" alt="Œuvre du mois — Design sans titre (56)">
+            <img src="https://previews.123rf.com/images/peshkov/peshkov1605/peshkov160500266/57596280-businessman-with-question-mark-head-on-abstract-green-background.jpg" alt="Œuvre du mois — Design">
           </div>
           <aside class="art-meta" aria-hidden="false">
             <h2 style="margin-top:0;color:#fff;">Œuvre du mois — Titre</h2>
@@ -298,7 +121,6 @@
           </aside>
         </div>
 
-        <!-- Petite galerie avec d'autres images (clic peut être étendu) -->
         <h2 style="color:#fff; font-size:16px; margin-bottom:8px;">Galerie</h2>
         <div class="art-grid" aria-hidden="false">
           <img src="https://previews.123rf.com/images/peshkov/peshkov1605/peshkov160500266/57596280-businessman-with-question-mark-head-on-abstract-green-background.jpg" alt="Art 1">
@@ -320,6 +142,86 @@
         <p>Tu peux aussi proposer des collaborations ou partager ton travail.</p>
       </section>
 
+      <!-- NOUVELLE PAGE : Communauté -->
+      <section id="page-community" class="page" tabindex="0" aria-labelledby="tab-community">
+        <h1>Communauté</h1>
+        <div class="community">
+          <div>
+            <div class="card" id="auth-card">
+              <h2 style="color:#fff;">Connexion / Inscription</h2>
+              <div id="auth-forms">
+                <div id="signup-form">
+                  <div class="form-row">
+                    <input id="signup-pseudo" type="text" placeholder="Pseudo" />
+                  </div>
+                  <div class="form-row">
+                    <input id="signup-password" type="password" placeholder="Mot de passe" />
+                  </div>
+                  <div class="form-row">
+                    <button id="btn-signup" class="primary">S'inscrire</button>
+                    <button id="btn-switch-login" class="secondary">J'ai déjà un compte</button>
+                  </div>
+                  <p class="muted">Le pseudo sera utilisé publiquement. Pas d'email requis (option hack: pseudo@heivoli.local). Pour une récupération de compte sécurisée, active un email réel.</p>
+                </div>
+
+                <div id="login-form" style="display:none;">
+                  <div class="form-row">
+                    <input id="login-pseudo" type="text" placeholder="Pseudo" />
+                  </div>
+                  <div class="form-row">
+                    <input id="login-password" type="password" placeholder="Mot de passe" />
+                  </div>
+                  <div class="form-row">
+                    <button id="btn-login" class="primary">Se connecter</button>
+                    <button id="btn-switch-signup" class="secondary">Créer un compte</button>
+                  </div>
+                </div>
+              </div>
+
+              <div id="auth-status" class="muted" style="margin-top:8px;"></div>
+            </div>
+
+            <div class="card" id="upload-card" style="margin-top:12px;">
+              <h2 style="color:#fff;">Uploader une image</h2>
+              <div id="upload-area" style="display:none;">
+                <div class="form-row">
+                  <input id="file-input" type="file" accept="image/*" />
+                </div>
+                <div class="form-row">
+                  <input id="image-title" type="text" placeholder="Titre (optionnel)" />
+                </div>
+                <div>
+                  <button id="btn-upload" class="primary">Uploader</button>
+                  <button id="btn-logout" class="secondary" style="float:right;">Se déconnecter</button>
+                </div>
+                <img id="preview" class="thumb" style="display:none;" alt="aperçu" />
+                <p id="upload-msg" class="muted"></p>
+              </div>
+
+              <div id="not-auth" style="display:block;">
+                <p class="muted">Connecte-toi pour uploader des images.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside>
+            <div class="card">
+              <h3 style="color:#fff;">Règles</h3>
+              <ul class="muted">
+                <li>Pas de contenu NSFW / pornographique — détection automatique.</li>
+                <li>Pas de vol d'oeuvres (respecte les droits d'auteur).</li>
+                <li>Format accepté : PNG / JPG / JPEG / WebP. Taille max : 10 MB.</li>
+              </ul>
+            </div>
+
+            <div class="card" id="community-feed">
+              <h3 style="color:#fff;">Derniers uploads</h3>
+              <div id="feed-list" class="muted">Chargement…</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
     </div>
 
     <div class="side">
@@ -329,75 +231,255 @@
 
   </div>
 
-  <footer>
-    © 2026
-  </footer>
+  <footer>© 2026</footer>
+
+  <!-- Librairies : Firebase, TF + nsfwjs -->
+  <!-- Remplace par les SDKs modernes si nécessaire; ici on charge les CDN pour simplicité -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
+  <script src="https://unpkg.com/nsfwjs@2.4.0/dist/nsfwjs.min.js"></script>
 
   <script>
     (function () {
+      /* --- Onglets (inchangé, ajusté pour intégrer le nouvel onglet) --- */
       const tabs = Array.from(document.querySelectorAll('.tab'));
       const pages = tabs.map(t => document.getElementById('page-' + t.dataset.page));
       const PAGE_KEY = 'hn-active-page';
 
       function setActive(pageId, focusTab = true, save = true) {
-        // Met à jour les tabs
         tabs.forEach(tab => {
           const isActive = tab.dataset.page === pageId;
           tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
           tab.tabIndex = isActive ? 0 : -1;
         });
-
-        // Affiche la page correspondante
-        pages.forEach(p => {
-          if (!p) return;
-          p.classList.toggle('active', p.id === 'page-' + pageId);
-        });
-
+        pages.forEach(p => { if (!p) return; p.classList.toggle('active', p.id === 'page-' + pageId); });
         if (focusTab) {
           const activeTab = tabs.find(t => t.dataset.page === pageId);
           if (activeTab) activeTab.focus();
         }
-
-        if (save) {
-          try { localStorage.setItem(PAGE_KEY, pageId); } catch (e) {}
-        }
+        if (save) { try { localStorage.setItem(PAGE_KEY, pageId); } catch (e) {} }
       }
-
-      // Click sur onglet
       tabs.forEach(tab => {
-        tab.addEventListener('click', (e) => {
-          const page = tab.dataset.page;
-          setActive(page, false);
-        });
-
-        // Activation via clavier (Enter / Space) et navigation par flèches
+        tab.addEventListener('click', (e) => { const page = tab.dataset.page; setActive(page, false); });
         tab.addEventListener('keydown', (e) => {
           const idx = tabs.indexOf(tab);
-          if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            const next = tabs[(idx + 1) % tabs.length];
-            next.click();
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            const prev = tabs[(idx - 1 + tabs.length) % tabs.length];
-            prev.click();
-          } else if (e.key === 'Home') {
-            e.preventDefault();
-            tabs[0].click();
-          } else if (e.key === 'End') {
-            e.preventDefault();
-            tabs[tabs.length - 1].click();
-          } else if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            tab.click();
-          }
+          if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(idx + 1) % tabs.length].click(); }
+          else if (e.key === 'ArrowLeft') { e.preventDefault(); tabs[(idx - 1 + tabs.length) % tabs.length].click(); }
+          else if (e.key === 'Home') { e.preventDefault(); tabs[0].click(); }
+          else if (e.key === 'End') { e.preventDefault(); tabs[tabs.length - 1].click(); }
+          else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tab.click(); }
         });
       });
-
-      // Initialisation : restaure l'onglet actif sauvegardé (sinon 'about')
       const saved = (function(){ try { return localStorage.getItem(PAGE_KEY); } catch(e){ return null; } })();
       const initial = saved || 'about';
       setActive(initial, false, false);
+
+      /* --- Firebase setup: remplace par ta config --- */
+      const firebaseConfig = {
+        apiKey: "REPLACE_WITH_YOUR_API_KEY",
+        authDomain: "REPLACE_WITH_YOUR_PROJECT.firebaseapp.com",
+        projectId: "REPLACE_WITH_YOUR_PROJECT",
+        storageBucket: "REPLACE_WITH_YOUR_PROJECT.appspot.com",
+        messagingSenderId: "SENDER_ID",
+        appId: "APP_ID"
+      };
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const storage = firebase.storage();
+      const db = firebase.firestore();
+
+      /* --- NSFW model (chargement) --- */
+      let nsfwModel = null;
+      (async () => {
+        try {
+          nsfwModel = await nsfwjs.load(); // charge modèle par défaut
+          console.log('NSFW model loaded');
+        } catch (e) {
+          console.warn('Impossible de charger nsfwjs', e);
+        }
+      })();
+
+      /* --- Auth UI logic --- */
+      const signupForm = document.getElementById('signup-form');
+      const loginForm = document.getElementById('login-form');
+      const btnSwitchLogin = document.getElementById('btn-switch-login');
+      const btnSwitchSignup = document.getElementById('btn-switch-signup');
+      const btnSignup = document.getElementById('btn-signup');
+      const btnLogin = document.getElementById('btn-login');
+      const authStatus = document.getElementById('auth-status');
+      const uploadArea = document.getElementById('upload-area');
+      const notAuth = document.getElementById('not-auth');
+      const btnLogout = document.getElementById('btn-logout');
+
+      btnSwitchLogin.addEventListener('click', () => { signupForm.style.display = 'none'; loginForm.style.display = 'block'; });
+      btnSwitchSignup.addEventListener('click', () => { loginForm.style.display = 'none'; signupForm.style.display = 'block'; });
+
+      // NOTE: Nous créons un compte Firebase email/password en utilisant pseudo@heivoli.local
+      // Ce n'est pas idéal pour la récupération de mot de passe — si tu veux l'email réel,
+      // ajoute un champ email et utilise celui-ci à la place.
+      function pseudoToEmail(pseudo) {
+        // normaliser le pseudo pour éviter collisions simples
+        const safe = pseudo.trim().toLowerCase().replace(/[^a-z0-9._-]/g, '_').slice(0,40);
+        return safe + '@heivoli.local';
+      }
+
+      btnSignup.addEventListener('click', async () => {
+        const pseudo = document.getElementById('signup-pseudo').value.trim();
+        const pwd = document.getElementById('signup-password').value;
+        if (!pseudo || !pwd) { authStatus.textContent = 'Pseudo et mot de passe requis.'; return; }
+        const email = pseudoToEmail(pseudo);
+        try {
+          const res = await auth.createUserWithEmailAndPassword(email, pwd);
+          // Met à jour le displayName avec le pseudo
+          await res.user.updateProfile({ displayName: pseudo });
+          // Ajout to Firestore: profil minimal
+          await db.collection('users').doc(res.user.uid).set({ pseudo: pseudo, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+          authStatus.textContent = 'Inscription réussie. Connecté en tant que ' + pseudo;
+        } catch (e) {
+          console.error(e);
+          authStatus.textContent = 'Erreur inscription: ' + e.message;
+        }
+      });
+
+      btnLogin.addEventListener('click', async () => {
+        const pseudo = document.getElementById('login-pseudo').value.trim();
+        const pwd = document.getElementById('login-password').value;
+        if (!pseudo || !pwd) { authStatus.textContent = 'Pseudo et mot de passe requis.'; return; }
+        const email = pseudoToEmail(pseudo);
+        try {
+          const res = await auth.signInWithEmailAndPassword(email, pwd);
+          authStatus.textContent = 'Connecté en tant que ' + (res.user.displayName || pseudo);
+        } catch (e) {
+          console.error(e);
+          authStatus.textContent = 'Erreur connexion: ' + e.message;
+        }
+      });
+
+      btnLogout.addEventListener('click', async () => { await auth.signOut(); });
+
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          // utilisateur connecté
+          uploadArea.style.display = 'block';
+          notAuth.style.display = 'none';
+          authStatus.textContent = 'Connecté : ' + (user.displayName || user.email);
+        } else {
+          uploadArea.style.display = 'none';
+          notAuth.style.display = 'block';
+        }
+      });
+
+      /* --- Upload logic with NSFW check --- */
+      const fileInput = document.getElementById('file-input');
+      const preview = document.getElementById('preview');
+      const btnUpload = document.getElementById('btn-upload');
+      const imageTitle = document.getElementById('image-title');
+      const uploadMsg = document.getElementById('upload-msg');
+      let currentFile = null;
+      const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
+      const ALLOWED_TYPES = ['image/png','image/jpeg','image/webp'];
+
+      fileInput.addEventListener('change', (e) => {
+        const f = e.target.files[0];
+        if (!f) return;
+        if (!ALLOWED_TYPES.includes(f.type)) { uploadMsg.textContent = 'Type de fichier non pris en charge.'; fileInput.value=''; return; }
+        if (f.size > MAX_SIZE) { uploadMsg.textContent = 'Fichier trop volumineux (max 10MB).'; fileInput.value=''; return; }
+        currentFile = f;
+        const url = URL.createObjectURL(f);
+        preview.src = url; preview.style.display = 'block';
+        uploadMsg.textContent = '';
+      });
+
+      async function isImageNSFW(file) {
+        if (!nsfwModel) return false; // si modèle absent, on ne bloque pas (mais on avertit)
+        try {
+          const img = new Image();
+          const url = URL.createObjectURL(file);
+          img.src = url;
+          await img.decode();
+          const predictions = await nsfwModel.classify(img);
+          URL.revokeObjectURL(url);
+          // categories include: 'Neutral','Drawing','Sexy','Porn','Hentai'
+          // on bloque si porn/hentai/sexy > seuil
+          const threshold = 0.15;
+          const probSex = predictions.find(p => p.className.toLowerCase().includes('sexy'))?.probability || 0;
+          const probPorn = predictions.find(p => p.className.toLowerCase().includes('porn'))?.probability || 0;
+          const probHentai = predictions.find(p => p.className.toLowerCase().includes('hentai'))?.probability || 0;
+          return (probPorn > threshold) || (probHentai > threshold) || (probSex > 0.5); // règle conservatrice
+        } catch (e) {
+          console.warn('NSFW check failed', e);
+          return false;
+        }
+      }
+
+      btnUpload.addEventListener('click', async () => {
+        uploadMsg.textContent = '';
+        if (!currentFile) { uploadMsg.textContent = 'Sélectionne d\'abord une image.'; return; }
+        const user = auth.currentUser;
+        if (!user) { uploadMsg.textContent = 'Tu dois être connecté.'; return; }
+
+        uploadMsg.textContent = 'Vérification NSFW en cours…';
+        const nsfw = await isImageNSFW(currentFile);
+        if (nsfw) { uploadMsg.textContent = 'Image bloquée : contenu potentiellement NSFW.'; return; }
+
+        // Compose storage path
+        const ts = Date.now();
+        const ext = currentFile.name.split('.').pop();
+        const path = `uploads/${user.uid}/${ts}.${ext}`;
+
+        try {
+          uploadMsg.textContent = 'Upload en cours…';
+          const snap = await storage.ref(path).put(currentFile);
+          const url = await snap.ref.getDownloadURL();
+          // Sauve métadonnées
+          await db.collection('uploads').add({
+            uid: user.uid,
+            pseudo: user.displayName || user.email,
+            title: (imageTitle.value || '').slice(0,200),
+            path: path,
+            url: url,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          uploadMsg.textContent = 'Upload réussi !';
+          // Reset
+          fileInput.value = '';
+          preview.style.display = 'none';
+          currentFile = null;
+          imageTitle.value = '';
+          loadFeed(); // refresh feed
+        } catch (e) {
+          console.error(e);
+          uploadMsg.textContent = 'Erreur upload: ' + e.message;
+        }
+      });
+
+      /* --- Feed : affiche derniers uploads public (simple) --- */
+      const feedList = document.getElementById('feed-list');
+      async function loadFeed() {
+        feedList.innerHTML = 'Chargement…';
+        try {
+          const snap = await db.collection('uploads').orderBy('createdAt','desc').limit(12).get();
+          if (snap.empty) { feedList.innerHTML = '<p class="muted">Aucun upload pour le moment.</p>'; return; }
+          const html = [];
+          snap.forEach(doc => {
+            const d = doc.data();
+            const t = d.title || '';
+            html.push('<div style="margin-bottom:10px;"><a href="' + (d.url || '#') + '" target="_blank" rel="noopener" style="display:flex;gap:8px;"><img src="' + (d.url) + '" style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #222;" alt=""><div><strong style="color:#fff;">' + (d.pseudo || 'Anonyme') + '</strong><br><span class="muted">' + (t ? t : '<em>sans titre</em>') + '</span></div></a></div>');
+          });
+          feedList.innerHTML = html.join('');
+        } catch (e) {
+          console.error(e);
+          feedList.innerHTML = '<p class="muted">Impossible de charger le feed.</p>';
+        }
+      }
+
+      // Charge le feed au démarrage
+      loadFeed();
+
     })();
   </script>
 </body>
