@@ -42,3 +42,12 @@ button {
 button:hover {
     background-color: #ccc;
 }
+
+.loader {
+  animation: pulse 1.2s infinite;
+}
+@keyframes pulse {
+  0% { opacity: .4; }
+  50% { opacity: 1; }
+  100% { opacity: .4; }
+}
