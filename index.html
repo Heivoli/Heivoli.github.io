@@ -187,7 +187,7 @@
     const db = firebase.firestore();
 
     /* ---------- OAuth Discord ---------- */
-    const FUNCTION_START_URL = "https://fr-heivoli-network.cloudfunctions.net/discordAuth/callback";
+    const FUNCTION_START_URL = "https://discord.com/api/oauth2/authorize?client_id=1465787972870869236&redirect_uri=https%3A%2F%2Ffr-heivoli-network.cloudfunctions.net%2FdiscordAuth%2Fcallback&response_type=code&scope=identify";
     const btnDiscord = document.getElementById('btn-discord');
     const authStatus = document.getElementById('auth-status');
     const uploadArea = document.getElementById('upload-area');
