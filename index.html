@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heivoli Network</title>
 <style>
-:root{
-  --bg:#000; --panel:#000; --border:#222; --text:#ddd;
-  --muted:#777; --accent:#1f8cff;
-}
+:root{ --bg:#000; --panel:#000; --border:#222; --text:#ddd; --muted:#777; --accent:#1f8cff;}
 body{ margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--text);}
 a{ color:#aaa; text-decoration:none;} a:hover{ color:#fff; text-decoration:underline;}
 header{ padding:15px; border-bottom:1px solid var(--border); text-align:center;}
@@ -30,7 +27,6 @@ footer{ border-top:1px solid var(--border); margin-top:20px; padding:10px 15px; 
 .form-row{ display:flex; gap:8px; margin-bottom:8px;}
 button.primary{ background:var(--accent); color:#fff; padding:8px 10px; border-radius:6px; border:none; cursor:pointer;}
 button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-radius:6px; border:1px solid var(--border); cursor:pointer;}
-.oauth-btn{ display:inline-flex; align-items:center; gap:8px; background:#7289da; color:#fff; padding:10px 12px; border-radius:6px; border:none; cursor:pointer; font-weight:700;}
 .thumb{ max-width:100%; border:1px solid var(--border); border-radius:6px; display:block; margin-top:8px;}
 .muted{ color:var(--muted); font-size:13px;}
 
@@ -70,20 +66,20 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 <div class="content">
   <div class="banner" aria-hidden="true"></div>
 
-  <!-- Accueil -->
-  <section id="page-home" class="page active" tabindex="0" aria-labelledby="tab-home">
-    <h1>Bienvenue sur Heivoli Network</h1>
-    <p>Site d'art et communauté gaming. Connecte-toi pour uploader tes images !</p>
+  <!-- Onglet Accueil -->
+  <section id="page-home" class="page active">
+    <h1>Accueil</h1>
+    <p>Bienvenue sur Heivoli Network !</p>
   </section>
 
-  <!-- À propos -->
-  <section id="page-about" class="page" tabindex="0" aria-labelledby="tab-about">
+  <!-- Onglet À propos -->
+  <section id="page-about" class="page">
     <h1>À propos</h1>
-    <p>Heivoli Network est une communauté dédiée aux artistes et créateurs.</p>
+    <p>Heivoli Network est une communauté pour artistes et créateurs.</p>
   </section>
 
-  <!-- Art du mois -->
-  <section id="page-art" class="page" tabindex="0" aria-labelledby="tab-art">
+  <!-- Onglet Art du mois -->
+  <section id="page-art" class="page">
     <h1>Art du mois</h1>
     <div class="art-feature">
       <img src="https://via.placeholder.com/600x400" alt="Art principal">
@@ -99,44 +95,49 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="page-contact" class="page" tabindex="0" aria-labelledby="tab-contact">
+  <!-- Onglet Contact -->
+  <section id="page-contact" class="page">
     <h1>Contact</h1>
-    <p>Contactez-nous via email : contact@heivoli.com</p>
+    <p>Contactez-nous : contact@heivoli.com</p>
   </section>
 
-  <!-- Communauté -->
-  <section id="page-community" class="page" tabindex="0" aria-labelledby="tab-community">
+  <!-- Onglet Communauté -->
+  <section id="page-community" class="page">
     <h1>Communauté</h1>
     <div class="community">
       <div>
+        <!-- Connexion -->
         <div class="card" id="auth-card">
-          <h2 style="color:#fff;">Connexion simple</h2>
+          <h2 style="color:#fff;">Connexion</h2>
           <div id="login-form">
             <div class="form-row">
-              <input type="text" id="pseudo" placeholder="Ton pseudo" />
+              <input type="text" id="pseudo" placeholder="Pseudo">
             </div>
             <div class="form-row">
-              <button id="btn-login" class="primary">Se connecter</button>
+              <input type="password" id="password" placeholder="Mot de passe">
+            </div>
+            <div class="form-row">
+              <button id="btn-login" class="primary">Se connecter / créer compte</button>
             </div>
           </div>
-          <p id="auth-status" class="muted" style="margin-top:8px;"></p>
+          <p id="auth-status" class="muted"></p>
           <button id="btn-logout" class="secondary" style="display:none;">Se déconnecter</button>
         </div>
 
+        <!-- Upload images -->
         <div class="card" id="upload-card" style="margin-top:12px;">
           <h2 style="color:#fff;">Uploader une image</h2>
           <div id="upload-area" style="display:none;">
             <div class="form-row">
-              <input id="file-input" type="file" accept="image/*" />
+              <input id="file-input" type="file" accept="image/*">
             </div>
             <div class="form-row">
-              <input id="image-title" type="text" placeholder="Titre (optionnel)" />
+              <input id="image-title" type="text" placeholder="Titre (optionnel)">
             </div>
             <div>
               <button id="btn-upload" class="primary">Uploader</button>
             </div>
-            <img id="preview" class="thumb" style="display:none;" alt="aperçu" />
+            <img id="preview" class="thumb" style="display:none;">
             <p id="upload-msg" class="muted"></p>
           </div>
           <div id="not-auth" style="display:block;">
@@ -149,9 +150,9 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
         <div class="card">
           <h3 style="color:#fff;">Règles</h3>
           <ul class="muted">
-            <li>Pas de contenu NSFW / pornographique — détection automatique.</li>
-            <li>Pas de vol d'oeuvres (respecte les droits d'auteur).</li>
-            <li>Format accepté : PNG / JPG / JPEG / WebP. Taille max : 10 MB.</li>
+            <li>Pas de contenu NSFW / pornographique.</li>
+            <li>Pas de vol d'oeuvres.</li>
+            <li>PNG/JPG/WebP, max 10MB.</li>
           </ul>
         </div>
       </aside>
@@ -161,8 +162,8 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 </div>
 
 <div class="side">
-  <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Visuel de présentation">
-  <img src="https://via.placeholder.com/300x200" alt="Image 2">
+  <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png">
+  <img src="https://via.placeholder.com/300x200">
 </div>
 </div>
 
@@ -175,15 +176,15 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 
 <script>
 (function(){
-  // onglets
-  const tabs = Array.from(document.querySelectorAll('.tab'));
-  const pages = tabs.map(t => document.getElementById('page-' + t.dataset.page)).filter(Boolean);
-  tabs.forEach(tab => tab.addEventListener('click',()=>{
+  // Onglets
+  const tabs = document.querySelectorAll('.tab');
+  const pages = document.querySelectorAll('.page');
+  tabs.forEach(tab => tab.addEventListener('click', ()=>{
     tabs.forEach(t=>t.setAttribute('aria-selected',t===tab));
     pages.forEach(p=>p.id==='page-'+tab.dataset.page?p.classList.add('active'):p.classList.remove('active'));
   }));
 
-  // Firebase config
+  // Firebase
   const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
     authDomain: "YOUR_PROJECT.firebaseapp.com",
@@ -197,31 +198,37 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
   const storage = firebase.storage();
   const db = firebase.firestore();
 
-  // Login simple
+  // Login pseudo + password
   const btnLogin = document.getElementById('btn-login');
   const btnLogout = document.getElementById('btn-logout');
   const pseudoInput = document.getElementById('pseudo');
+  const passInput = document.getElementById('password');
   const authStatus = document.getElementById('auth-status');
   const uploadArea = document.getElementById('upload-area');
   const notAuth = document.getElementById('not-auth');
 
   btnLogin.addEventListener('click', async()=>{
     const pseudo = pseudoInput.value.trim();
-    if(!pseudo){ authStatus.textContent="Entre un pseudo"; return; }
-    const user = await auth.signInAnonymously();
-    await db.collection('profiles').doc(user.user.uid).set({pseudo:pseudo});
-    authStatus.textContent = 'Connecté : ' + pseudo;
-    uploadArea.style.display='block';
-    notAuth.style.display='none';
-    btnLogout.style.display='inline-block';
+    const pass = passInput.value.trim();
+    if(!pseudo || !pass){ authStatus.textContent='Remplis pseudo + mot de passe'; return;}
+
+    try{
+      let userCredential;
+      try{ // login
+        userCredential = await auth.signInWithEmailAndPassword(pseudo+'@heivoli.fake',pass);
+      }catch(e){ // si pas de compte, créer
+        userCredential = await auth.createUserWithEmailAndPassword(pseudo+'@heivoli.fake',pass);
+        await db.collection('profiles').doc(userCredential.user.uid).set({pseudo});
+      }
+      authStatus.textContent='Connecté : '+pseudo;
+      uploadArea.style.display='block';
+      notAuth.style.display='none';
+      btnLogout.style.display='inline-block';
+    }catch(e){ authStatus.textContent='Erreur : '+e.message; }
   });
 
   btnLogout.addEventListener('click', async()=>{
     await auth.signOut();
-    authStatus.textContent='';
-    uploadArea.style.display='none';
-    notAuth.style.display='block';
-    btnLogout.style.display='none';
   });
 
   auth.onAuthStateChanged(async(user)=>{
@@ -232,7 +239,7 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
       uploadArea.style.display='block';
       notAuth.style.display='none';
       btnLogout.style.display='inline-block';
-    } else {
+    }else{
       authStatus.textContent='';
       uploadArea.style.display='none';
       notAuth.style.display='block';
@@ -240,7 +247,7 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
     }
   });
 
-  // Upload image
+  // Upload images
   const fileInput = document.getElementById('file-input');
   const preview = document.getElementById('preview');
   const btnUpload = document.getElementById('btn-upload');
@@ -261,23 +268,22 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 
   btnUpload.addEventListener('click', async()=>{
     uploadMsg.textContent='';
-    if(!currentFile){ uploadMsg.textContent="Sélectionne une image"; return;}
+    if(!currentFile){ uploadMsg.textContent='Sélectionne une image'; return;}
     const user = auth.currentUser;
-    if(!user){ uploadMsg.textContent="Connecte-toi d'abord"; return;}
+    if(!user){ uploadMsg.textContent='Connecte-toi d’abord'; return;}
     const ts = Date.now();
     const ext = (currentFile.name.split('.').pop()||'png').slice(0,6);
     const path = `uploads/${user.uid}/${ts}.${ext}`;
     try{
-      uploadMsg.textContent='Upload…';
       const snap = await storage.ref(path).put(currentFile);
       const url = await snap.ref.getDownloadURL();
-      const title = (imageTitle.value||'').slice(0,200);
       const docProfile = await db.collection('profiles').doc(user.uid).get();
       const pseudo = docProfile.exists?docProfile.data().pseudo:'Anonyme';
-      await db.collection('uploads').add({uid:user.uid,pseudo:title||pseudo,title:title,path:path,url:url,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+      const title = (imageTitle.value||'').slice(0,200);
+      await db.collection('uploads').add({uid:user.uid,pseudo,title,path,url,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
       uploadMsg.textContent='Upload réussi !';
       fileInput.value=''; preview.style.display='none'; currentFile=null; imageTitle.value='';
-    }catch(e){ console.error(e); uploadMsg.textContent='Erreur upload: '+(e.message||e);}
+    }catch(e){ uploadMsg.textContent='Erreur upload : '+e.message; }
   });
 
 })();
