@@ -21,7 +21,6 @@ header{ padding:15px; border-bottom:1px solid var(--border); text-align:center;}
 .side{ display:flex; flex-direction:column; gap:15px;}
 .side img{ width:100%; height:auto; border:1px solid var(--border); display:block;}
 footer{ border-top:1px solid var(--border); margin-top:20px; padding:10px 15px; font-size:12px; color:var(--muted); text-align:center;}
-
 .community{ display:grid; grid-template-columns:1fr 320px; gap:16px; align-items:start;}
 .card{ background:#050505; border:1px solid var(--border); padding:12px; border-radius:8px;}
 .form-row{ display:flex; gap:8px; margin-bottom:8px;}
@@ -54,11 +53,11 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 <header>
 <div class="site-title">Heivoli Network</div>
 <div class="tabs" role="tablist" aria-label="Navigation principale">
-  <button class="tab" role="tab" aria-selected="true" data-page="home" id="tab-home">Accueil</button>
-  <button class="tab" role="tab" aria-selected="false" data-page="about" id="tab-about">À propos</button>
-  <button class="tab" role="tab" aria-selected="false" data-page="art" id="tab-art">Art du mois</button>
-  <button class="tab" role="tab" aria-selected="false" data-page="contact" id="tab-contact">Contact</button>
-  <button class="tab" role="tab" aria-selected="false" data-page="community" id="tab-community">Communauté</button>
+  <button class="tab" role="tab" aria-selected="true" data-page="home">Accueil</button>
+  <button class="tab" role="tab" aria-selected="false" data-page="about">À propos</button>
+  <button class="tab" role="tab" aria-selected="false" data-page="art">Art du mois</button>
+  <button class="tab" role="tab" aria-selected="false" data-page="contact">Contact</button>
+  <button class="tab" role="tab" aria-selected="false" data-page="community">Communauté</button>
 </div>
 </header>
 
@@ -66,20 +65,20 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 <div class="content">
   <div class="banner" aria-hidden="true"></div>
 
-  <!-- Onglet Accueil -->
-  <section id="page-home" class="page active">
+  <!-- Accueil -->
+  <section id="page-home" class="page">
     <h1>Accueil</h1>
     <p>Bienvenue sur Heivoli Network !</p>
   </section>
 
-  <!-- Onglet À propos -->
-  <section id="page-about" class="page">
+  <!-- À propos -->
+  <section id="page-about" class="page" style="display:none;">
     <h1>À propos</h1>
     <p>Heivoli Network est une communauté pour artistes et créateurs.</p>
   </section>
 
-  <!-- Onglet Art du mois -->
-  <section id="page-art" class="page">
+  <!-- Art du mois -->
+  <section id="page-art" class="page" style="display:none;">
     <h1>Art du mois</h1>
     <div class="art-feature">
       <img src="https://via.placeholder.com/600x400" alt="Art principal">
@@ -95,48 +94,34 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
     </div>
   </section>
 
-  <!-- Onglet Contact -->
-  <section id="page-contact" class="page">
+  <!-- Contact -->
+  <section id="page-contact" class="page" style="display:none;">
     <h1>Contact</h1>
     <p>Contactez-nous : contact@heivoli.com</p>
   </section>
 
-  <!-- Onglet Communauté -->
-  <section id="page-community" class="page">
+  <!-- Communauté -->
+  <section id="page-community" class="page" style="display:none;">
     <h1>Communauté</h1>
     <div class="community">
       <div>
-        <!-- Connexion -->
         <div class="card" id="auth-card">
           <h2 style="color:#fff;">Connexion</h2>
           <div id="login-form">
-            <div class="form-row">
-              <input type="text" id="pseudo" placeholder="Pseudo">
-            </div>
-            <div class="form-row">
-              <input type="password" id="password" placeholder="Mot de passe">
-            </div>
-            <div class="form-row">
-              <button id="btn-login" class="primary">Se connecter / créer compte</button>
-            </div>
+            <div class="form-row"><input type="text" id="pseudo" placeholder="Pseudo"></div>
+            <div class="form-row"><input type="password" id="password" placeholder="Mot de passe"></div>
+            <div class="form-row"><button id="btn-login" class="primary">Se connecter / créer compte</button></div>
           </div>
           <p id="auth-status" class="muted"></p>
           <button id="btn-logout" class="secondary" style="display:none;">Se déconnecter</button>
         </div>
 
-        <!-- Upload images -->
         <div class="card" id="upload-card" style="margin-top:12px;">
           <h2 style="color:#fff;">Uploader une image</h2>
           <div id="upload-area" style="display:none;">
-            <div class="form-row">
-              <input id="file-input" type="file" accept="image/*">
-            </div>
-            <div class="form-row">
-              <input id="image-title" type="text" placeholder="Titre (optionnel)">
-            </div>
-            <div>
-              <button id="btn-upload" class="primary">Uploader</button>
-            </div>
+            <div class="form-row"><input id="file-input" type="file" accept="image/*"></div>
+            <div class="form-row"><input id="image-title" type="text" placeholder="Titre (optionnel)"></div>
+            <div><button id="btn-upload" class="primary">Uploader</button></div>
             <img id="preview" class="thumb" style="display:none;">
             <p id="upload-msg" class="muted"></p>
           </div>
@@ -176,118 +161,120 @@ button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-r
 
 <script>
 (function(){
-  // Onglets
-  const tabs = document.querySelectorAll('.tab');
-  const pages = document.querySelectorAll('.page');
-  tabs.forEach(tab => tab.addEventListener('click', ()=>{
-    tabs.forEach(t=>t.setAttribute('aria-selected',t===tab));
-    pages.forEach(p=>p.id==='page-'+tab.dataset.page?p.classList.add('active'):p.classList.remove('active'));
-  }));
+// Onglets fonctionnels
+const tabs = document.querySelectorAll('.tab');
+const pages = document.querySelectorAll('.page');
 
-  // Firebase
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_ID",
-    appId: "YOUR_APP_ID"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const storage = firebase.storage();
-  const db = firebase.firestore();
-
-  // Login pseudo + password
-  const btnLogin = document.getElementById('btn-login');
-  const btnLogout = document.getElementById('btn-logout');
-  const pseudoInput = document.getElementById('pseudo');
-  const passInput = document.getElementById('password');
-  const authStatus = document.getElementById('auth-status');
-  const uploadArea = document.getElementById('upload-area');
-  const notAuth = document.getElementById('not-auth');
-
-  btnLogin.addEventListener('click', async()=>{
-    const pseudo = pseudoInput.value.trim();
-    const pass = passInput.value.trim();
-    if(!pseudo || !pass){ authStatus.textContent='Remplis pseudo + mot de passe'; return;}
-
-    try{
-      let userCredential;
-      try{ // login
-        userCredential = await auth.signInWithEmailAndPassword(pseudo+'@heivoli.fake',pass);
-      }catch(e){ // si pas de compte, créer
-        userCredential = await auth.createUserWithEmailAndPassword(pseudo+'@heivoli.fake',pass);
-        await db.collection('profiles').doc(userCredential.user.uid).set({pseudo});
-      }
-      authStatus.textContent='Connecté : '+pseudo;
-      uploadArea.style.display='block';
-      notAuth.style.display='none';
-      btnLogout.style.display='inline-block';
-    }catch(e){ authStatus.textContent='Erreur : '+e.message; }
+tabs.forEach(tab => {
+  tab.addEventListener('click', ()=>{
+    // Onglets
+    tabs.forEach(t => t.setAttribute('aria-selected','false'));
+    tab.setAttribute('aria-selected','true');
+    // Pages
+    pages.forEach(p => p.id === 'page-'+tab.dataset.page ? p.style.display='block' : p.style.display='none');
   });
+});
 
-  btnLogout.addEventListener('click', async()=>{
-    await auth.signOut();
-  });
+// Firebase config
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const storage = firebase.storage();
+const db = firebase.firestore();
 
-  auth.onAuthStateChanged(async(user)=>{
-    if(user){
-      const doc = await db.collection('profiles').doc(user.uid).get();
-      const pseudo = doc.exists?doc.data().pseudo:'Anonyme';
-      authStatus.textContent='Connecté : '+pseudo;
-      uploadArea.style.display='block';
-      notAuth.style.display='none';
-      btnLogout.style.display='inline-block';
-    }else{
-      authStatus.textContent='';
-      uploadArea.style.display='none';
-      notAuth.style.display='block';
-      btnLogout.style.display='none';
+// Login pseudo + mot de passe
+const btnLogin = document.getElementById('btn-login');
+const btnLogout = document.getElementById('btn-logout');
+const pseudoInput = document.getElementById('pseudo');
+const passInput = document.getElementById('password');
+const authStatus = document.getElementById('auth-status');
+const uploadArea = document.getElementById('upload-area');
+const notAuth = document.getElementById('not-auth');
+
+btnLogin.addEventListener('click', async()=>{
+  const pseudo = pseudoInput.value.trim();
+  const pass = passInput.value.trim();
+  if(!pseudo || !pass){ authStatus.textContent='Remplis pseudo + mot de passe'; return;}
+
+  try{
+    let userCredential;
+    try{ // login
+      userCredential = await auth.signInWithEmailAndPassword(pseudo+'@heivoli.fake',pass);
+    }catch(e){ // création
+      userCredential = await auth.createUserWithEmailAndPassword(pseudo+'@heivoli.fake',pass);
+      await db.collection('profiles').doc(userCredential.user.uid).set({pseudo});
     }
-  });
+    authStatus.textContent='Connecté : '+pseudo;
+    uploadArea.style.display='block';
+    notAuth.style.display='none';
+    btnLogout.style.display='inline-block';
+  }catch(e){ authStatus.textContent='Erreur : '+e.message; }
+});
 
-  // Upload images
-  const fileInput = document.getElementById('file-input');
-  const preview = document.getElementById('preview');
-  const btnUpload = document.getElementById('btn-upload');
-  const imageTitle = document.getElementById('image-title');
-  const uploadMsg = document.getElementById('upload-msg');
-  let currentFile = null;
-  const MAX_SIZE = 10*1024*1024;
-  const ALLOWED_TYPES = ['image/png','image/jpeg','image/webp'];
+btnLogout.addEventListener('click', async()=>{ await auth.signOut(); });
 
-  fileInput.addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    if(!ALLOWED_TYPES.includes(f.type)){ uploadMsg.textContent='Type non supporté'; fileInput.value=''; return;}
-    if(f.size>MAX_SIZE){ uploadMsg.textContent='Fichier > 10MB'; fileInput.value=''; return;}
-    currentFile=f;
-    preview.src=URL.createObjectURL(f); preview.style.display='block';
-  });
+auth.onAuthStateChanged(async(user)=>{
+  if(user){
+    const doc = await db.collection('profiles').doc(user.uid).get();
+    const pseudo = doc.exists?doc.data().pseudo:'Anonyme';
+    authStatus.textContent='Connecté : '+pseudo;
+    uploadArea.style.display='block';
+    notAuth.style.display='none';
+    btnLogout.style.display='inline-block';
+  }else{
+    authStatus.textContent='';
+    uploadArea.style.display='none';
+    notAuth.style.display='block';
+    btnLogout.style.display='none';
+  }
+});
 
-  btnUpload.addEventListener('click', async()=>{
-    uploadMsg.textContent='';
-    if(!currentFile){ uploadMsg.textContent='Sélectionne une image'; return;}
-    const user = auth.currentUser;
-    if(!user){ uploadMsg.textContent='Connecte-toi d’abord'; return;}
-    const ts = Date.now();
-    const ext = (currentFile.name.split('.').pop()||'png').slice(0,6);
-    const path = `uploads/${user.uid}/${ts}.${ext}`;
-    try{
-      const snap = await storage.ref(path).put(currentFile);
-      const url = await snap.ref.getDownloadURL();
-      const docProfile = await db.collection('profiles').doc(user.uid).get();
-      const pseudo = docProfile.exists?docProfile.data().pseudo:'Anonyme';
-      const title = (imageTitle.value||'').slice(0,200);
-      await db.collection('uploads').add({uid:user.uid,pseudo,title,path,url,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-      uploadMsg.textContent='Upload réussi !';
-      fileInput.value=''; preview.style.display='none'; currentFile=null; imageTitle.value='';
-    }catch(e){ uploadMsg.textContent='Erreur upload : '+e.message; }
-  });
+// Upload images
+const fileInput = document.getElementById('file-input');
+const preview = document.getElementById('preview');
+const btnUpload = document.getElementById('btn-upload');
+const imageTitle = document.getElementById('image-title');
+const uploadMsg = document.getElementById('upload-msg');
+let currentFile = null;
+const MAX_SIZE = 10*1024*1024;
+const ALLOWED_TYPES = ['image/png','image/jpeg','image/webp'];
 
+fileInput.addEventListener('change', e=>{
+  const f = e.target.files[0];
+  if(!f) return;
+  if(!ALLOWED_TYPES.includes(f.type)){ uploadMsg.textContent='Type non supporté'; fileInput.value=''; return;}
+  if(f.size>MAX_SIZE){ uploadMsg.textContent='Fichier > 10MB'; fileInput.value=''; return;}
+  currentFile=f;
+  preview.src=URL.createObjectURL(f); preview.style.display='block';
+});
+
+btnUpload.addEventListener('click', async()=>{
+  uploadMsg.textContent='';
+  if(!currentFile){ uploadMsg.textContent='Sélectionne une image'; return;}
+  const user = auth.currentUser;
+  if(!user){ uploadMsg.textContent='Connecte-toi d’abord'; return;}
+  const ts = Date.now();
+  const ext = (currentFile.name.split('.').pop()||'png').slice(0,6);
+  const path = `uploads/${user.uid}/${ts}.${ext}`;
+  try{
+    const snap = await storage.ref(path).put(currentFile);
+    const url = await snap.ref.getDownloadURL();
+    const docProfile = await db.collection('profiles').doc(user.uid).get();
+    const pseudo = docProfile.exists?docProfile.data().pseudo:'Anonyme';
+    const title = (imageTitle.value||'').slice(0,200);
+    await db.collection('uploads').add({uid:user.uid,pseudo,title,path,url,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+    uploadMsg.textContent='Upload réussi !';
+    fileInput.value=''; preview.style.display='none'; currentFile=null; imageTitle.value='';
+  }catch(e){ uploadMsg.textContent='Erreur upload : '+e.message; }
+});
 })();
 </script>
-
 </body>
 </html>
