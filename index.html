@@ -1,385 +1,287 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heivoli Network</title>
-  <style>
-    :root{
-      --bg:#000;
-      --panel:#000;
-      --border:#222;
-      --text:#ddd;
-      --muted:#777;
-      --accent:#1f8cff;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Heivoli Network</title>
+<style>
+:root{
+  --bg:#000; --panel:#000; --border:#222; --text:#ddd;
+  --muted:#777; --accent:#1f8cff;
+}
+body{ margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--text);}
+a{ color:#aaa; text-decoration:none;} a:hover{ color:#fff; text-decoration:underline;}
+header{ padding:15px; border-bottom:1px solid var(--border); text-align:center;}
+.site-title{ font-size:24px; font-weight:bold; color:#fff; margin-bottom:5px;}
+.tabs{ display:inline-flex; gap:8px; align-items:center; justify-content:center; margin-top:6px;}
+.tab{ background:transparent; color:var(--muted); border:1px solid transparent; padding:6px 10px; border-radius:6px; font-size:13px; cursor:pointer;}
+.tab:hover,.tab:focus{ color:#fff; outline:none; border-color:rgba(255,255,255,0.06);}
+.tab[aria-selected="true"]{ color:#fff; background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.06);}
+.banner{ width:100%; height:220px; background:url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat; border:1px solid var(--border); margin-bottom:15px;}
+.container{ max-width:1200px; margin:15px auto; padding:0 15px; display:grid; grid-template-columns:3fr 1fr; gap:15px;}
+.content{ background:var(--panel); border:1px solid var(--border); padding:15px; font-size:14px; line-height:1.6; min-height:320px;}
+.content h1{ font-size:18px; margin-top:0; color:#fff;}
+.side{ display:flex; flex-direction:column; gap:15px;}
+.side img{ width:100%; height:auto; border:1px solid var(--border); display:block;}
+footer{ border-top:1px solid var(--border); margin-top:20px; padding:10px 15px; font-size:12px; color:var(--muted); text-align:center;}
 
-    body {
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-    }
+.community{ display:grid; grid-template-columns:1fr 320px; gap:16px; align-items:start;}
+.card{ background:#050505; border:1px solid var(--border); padding:12px; border-radius:8px;}
+.form-row{ display:flex; gap:8px; margin-bottom:8px;}
+button.primary{ background:var(--accent); color:#fff; padding:8px 10px; border-radius:6px; border:none; cursor:pointer;}
+button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-radius:6px; border:1px solid var(--border); cursor:pointer;}
+.oauth-btn{ display:inline-flex; align-items:center; gap:8px; background:#7289da; color:#fff; padding:10px 12px; border-radius:6px; border:none; cursor:pointer; font-weight:700;}
+.thumb{ max-width:100%; border:1px solid var(--border); border-radius:6px; display:block; margin-top:8px;}
+.muted{ color:var(--muted); font-size:13px;}
 
-    a {
-      color:#aaa;
-      text-decoration:none;
-    }
+/* Art du mois */
+.art-feature{ display:grid; grid-template-columns:1fr 320px; gap:16px; align-items:start; margin-bottom:18px;}
+.art-feature img{ width:100%; height:auto; border-radius:8px; border:1px solid var(--border); display:block;}
+.art-meta{ color:var(--muted);}
+.art-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+.art-grid img{ width:100%; height:140px; object-fit:cover; border-radius:6px; border:1px solid var(--border); display:block;}
 
-    a:hover {
-      color:#fff;
-      text-decoration:underline;
-    }
-
-    header{
-      padding:15px;
-      border-bottom:1px solid var(--border);
-      text-align:center;
-    }
-
-    .site-title{
-      font-size:24px;
-      font-weight:bold;
-      color:#fff;
-      margin-bottom:5px;
-    }
-
-    .tabs{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      justify-content:center;
-      margin-top:6px;
-    }
-
-    .tab{
-      background:transparent;
-      color:var(--muted);
-      border:1px solid transparent;
-      padding:6px 10px;
-      border-radius:6px;
-      font-size:13px;
-      cursor:pointer;
-    }
-
-    .tab:hover,.tab:focus{
-      color:#fff;
-      outline:none;
-      border-color:rgba(255,255,255,0.06);
-    }
-
-    .tab[aria-selected="true"]{
-      color:#fff;
-      background:rgba(255,255,255,0.03);
-      border-color:rgba(255,255,255,0.06);
-    }
-
-    .banner{
-      width:100%;
-      height:220px;
-      background:url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat;
-      border:1px solid var(--border);
-      margin-bottom:15px;
-    }
-
-    .container{
-      max-width:1200px;
-      margin:15px auto;
-      padding:0 15px;
-      display:grid;
-      grid-template-columns:3fr 1fr;
-      gap:15px;
-    }
-
-    .content{
-      background:var(--panel);
-      border:1px solid var(--border);
-      padding:15px;
-      font-size:14px;
-      line-height:1.6;
-      min-height:320px;
-    }
-
-    .content h1{
-      font-size:18px;
-      margin-top:0;
-      color:#fff;
-    }
-
-    .page{
-      display:none;
-    }
-
-    .page.active{
-      display:block;
-    }
-
-    .side{
-      display:flex;
-      flex-direction:column;
-      gap:15px;
-    }
-
-    .side img{
-      width:100%;
-      height:auto;
-      border:1px solid var(--border);
-      display:block;
-    }
-
-    footer{
-      border-top:1px solid var(--border);
-      margin-top:20px;
-      padding:10px 15px;
-      font-size:12px;
-      color:var(--muted);
-      text-align:center;
-    }
-
-    /* Art du mois */
-    .art-feature{
-      display:grid;
-      grid-template-columns:1fr 320px;
-      gap:16px;
-      align-items:start;
-      margin-bottom:18px;
-    }
-
-    .art-feature img{
-      width:100%;
-      height:auto;
-      border-radius:8px;
-      border:1px solid var(--border);
-      display:block;
-    }
-
-    .art-meta{
-      color:var(--muted);
-    }
-
-    .art-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-    }
-
-    .art-grid img{
-      width:100%;
-      height:140px;
-      object-fit:cover;
-      border-radius:6px;
-      border:1px solid var(--border);
-      display:block;
-    }
-
-    /* Responsive */
-    @media (max-width:900px){
-      .art-feature{grid-template-columns:1fr;}
-      .art-grid{grid-template-columns:repeat(2,1fr);}
-      .community{grid-template-columns:1fr;}
-      .container{grid-template-columns:1fr;}
-      .side{order:2;}
-      .content{order:1;}
-      .banner{height:160px;}
-    }
-
-    @media (max-width:480px){
-      .art-grid{grid-template-columns:1fr;}
-    }
-
-    .community{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start;}
-    .card{background:#050505;border:1px solid var(--border);padding:12px;border-radius:8px;}
-    .form-row{display:flex;gap:8px;margin-bottom:8px;}
-    button.primary{background:var(--accent);color:#fff;padding:8px 10px;border-radius:6px;border:none;cursor:pointer;}
-    button.secondary{background:transparent;color:#fff;padding:8px 10px;border-radius:6px;border:1px solid var(--border);cursor:pointer;}
-    .oauth-btn{display:inline-flex;align-items:center;gap:8px;background:#7289da;color:#fff;padding:10px 12px;border-radius:6px;border:none;cursor:pointer;font-weight:700;}
-    .thumb{max-width:100%;border:1px solid var(--border);border-radius:6px;display:block;margin-top:8px;}
-    .muted{color:var(--muted);font-size:13px;}
-  </style>
+@media (max-width:900px){
+  .art-feature{ grid-template-columns:1fr;}
+  .art-grid{ grid-template-columns:repeat(2,1fr);}
+  .community{ grid-template-columns:1fr;}
+  .container{ grid-template-columns:1fr;}
+  .side{ order:2;}
+  .content{ order:1;}
+  .banner{ height:160px;}
+}
+@media (max-width:480px){ .art-grid{ grid-template-columns:1fr; }}
+</style>
 </head>
 <body>
-  <header>
-    <div class="site-title">Heivoli Network</div>
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" aria-selected="true" data-page="home">Accueil</button>
-      <button class="tab" role="tab" aria-selected="false" data-page="about">À propos</button>
-      <button class="tab" role="tab" aria-selected="false" data-page="art">Art du mois</button>
-      <button class="tab" role="tab" aria-selected="false" data-page="contact">Contact</button>
-      <button class="tab" role="tab" aria-selected="false" data-page="community">Communauté</button>
-    </div>
-  </header>
 
+<header>
+<div class="site-title">Heivoli Network</div>
+<div class="tabs" role="tablist" aria-label="Navigation principale">
+  <button class="tab" role="tab" aria-selected="true" data-page="home" id="tab-home">Accueil</button>
+  <button class="tab" role="tab" aria-selected="false" data-page="about" id="tab-about">À propos</button>
+  <button class="tab" role="tab" aria-selected="false" data-page="art" id="tab-art">Art du mois</button>
+  <button class="tab" role="tab" aria-selected="false" data-page="contact" id="tab-contact">Contact</button>
+  <button class="tab" role="tab" aria-selected="false" data-page="community" id="tab-community">Communauté</button>
+</div>
+</header>
+
+<div class="container">
+<div class="content">
   <div class="banner" aria-hidden="true"></div>
 
-  <div class="container">
-    <div class="content">
-      <!-- Accueil -->
-      <section id="page-home" class="page active">
-        <h1>Bienvenue sur Heivoli Network</h1>
-        <p>Ici, tu peux découvrir l'art, la communauté et partager tes créations !</p>
-      </section>
+  <!-- Accueil -->
+  <section id="page-home" class="page active" tabindex="0" aria-labelledby="tab-home">
+    <h1>Bienvenue sur Heivoli Network</h1>
+    <p>Site d'art et communauté gaming. Connecte-toi pour uploader tes images !</p>
+  </section>
 
-      <!-- À propos -->
-      <section id="page-about" class="page">
-        <h1>À propos</h1>
-        <p>Heivoli Network est une plateforme dédiée aux artistes et créateurs.</p>
-      </section>
+  <!-- À propos -->
+  <section id="page-about" class="page" tabindex="0" aria-labelledby="tab-about">
+    <h1>À propos</h1>
+    <p>Heivoli Network est une communauté dédiée aux artistes et créateurs.</p>
+  </section>
 
-      <!-- Art du mois -->
-      <section id="page-art" class="page">
-        <h1>Art du mois</h1>
-        <div class="art-feature">
-          <img src="https://via.placeholder.com/600x400" alt="Image mise en avant">
-          <div>
-            <h2>Titre de l'art</h2>
-            <p class="art-meta">Auteur : Exemple<br>Date : Janvier 2026</p>
-            <p>Description rapide de l'œuvre.</p>
-          </div>
-        </div>
-        <div class="art-grid">
-          <img src="https://via.placeholder.com/200x140" alt="Art 1">
-          <img src="https://via.placeholder.com/200x140" alt="Art 2">
-          <img src="https://via.placeholder.com/200x140" alt="Art 3">
-          <img src="https://via.placeholder.com/200x140" alt="Art 4">
-          <img src="https://via.placeholder.com/200x140" alt="Art 5">
-          <img src="https://via.placeholder.com/200x140" alt="Art 6">
-        </div>
-      </section>
+  <!-- Art du mois -->
+  <section id="page-art" class="page" tabindex="0" aria-labelledby="tab-art">
+    <h1>Art du mois</h1>
+    <div class="art-feature">
+      <img src="https://via.placeholder.com/600x400" alt="Art principal">
+      <div class="art-meta">
+        <strong>Artiste : John Doe</strong>
+        <p>Titre : Illustration futuriste</p>
+      </div>
+    </div>
+    <div class="art-grid">
+      <img src="https://via.placeholder.com/200x140" alt="Art 1">
+      <img src="https://via.placeholder.com/200x140" alt="Art 2">
+      <img src="https://via.placeholder.com/200x140" alt="Art 3">
+    </div>
+  </section>
 
-      <!-- Contact -->
-      <section id="page-contact" class="page">
-        <h1>Contact</h1>
-        <p>Tu peux nous contacter via notre email ou nos réseaux sociaux.</p>
-      </section>
+  <!-- Contact -->
+  <section id="page-contact" class="page" tabindex="0" aria-labelledby="tab-contact">
+    <h1>Contact</h1>
+    <p>Contactez-nous via email : contact@heivoli.com</p>
+  </section>
 
-      <!-- Communauté -->
-      <section id="page-community" class="page">
-        <h1>Communauté</h1>
-        <div class="community">
-          <div>
-            <div class="card" id="auth-card">
-              <h2>Connexion via Discord</h2>
-              <div id="oauth-form">
-                <p class="muted">Connecte-toi avec Discord pour uploader des images sur le site.</p>
-                <div class="form-row">
-                  <button id="btn-discord" class="oauth-btn">Se connecter avec Discord</button>
-                </div>
-              </div>
-              <div id="auth-status" class="muted" style="margin-top:8px;"></div>
+  <!-- Communauté -->
+  <section id="page-community" class="page" tabindex="0" aria-labelledby="tab-community">
+    <h1>Communauté</h1>
+    <div class="community">
+      <div>
+        <div class="card" id="auth-card">
+          <h2 style="color:#fff;">Connexion simple</h2>
+          <div id="login-form">
+            <div class="form-row">
+              <input type="text" id="pseudo" placeholder="Ton pseudo" />
             </div>
-
-            <div class="card" id="upload-card" style="margin-top:12px;">
-              <h2>Uploader une image</h2>
-              <div id="upload-area" style="display:none;">
-                <div class="form-row">
-                  <input id="file-input" type="file" accept="image/*">
-                </div>
-                <div class="form-row">
-                  <input id="image-title" type="text" placeholder="Titre (optionnel)">
-                </div>
-                <div>
-                  <button id="btn-upload" class="primary">Uploader</button>
-                  <button id="btn-logout" class="secondary" style="float:right;">Se déconnecter</button>
-                </div>
-                <img id="preview" class="thumb" style="display:none;" alt="aperçu">
-                <p id="upload-msg" class="muted"></p>
-              </div>
-              <div id="not-auth">
-                <p class="muted">Connecte-toi pour uploader des images.</p>
-              </div>
+            <div class="form-row">
+              <button id="btn-login" class="primary">Se connecter</button>
             </div>
           </div>
-
-          <aside>
-            <div class="card">
-              <h3>Règles</h3>
-              <ul class="muted">
-                <li>Pas de contenu NSFW / pornographique — détection automatique.</li>
-                <li>Pas de vol d'oeuvres (respecte les droits d'auteur).</li>
-                <li>Format accepté : PNG / JPG / JPEG / WebP. Taille max : 10 MB.</li>
-              </ul>
-            </div>
-            <div class="card" id="community-feed">
-              <h3>Derniers uploads</h3>
-              <div id="feed-list" class="muted">Chargement…</div>
-            </div>
-          </aside>
+          <p id="auth-status" class="muted" style="margin-top:8px;"></p>
+          <button id="btn-logout" class="secondary" style="display:none;">Se déconnecter</button>
         </div>
-      </section>
+
+        <div class="card" id="upload-card" style="margin-top:12px;">
+          <h2 style="color:#fff;">Uploader une image</h2>
+          <div id="upload-area" style="display:none;">
+            <div class="form-row">
+              <input id="file-input" type="file" accept="image/*" />
+            </div>
+            <div class="form-row">
+              <input id="image-title" type="text" placeholder="Titre (optionnel)" />
+            </div>
+            <div>
+              <button id="btn-upload" class="primary">Uploader</button>
+            </div>
+            <img id="preview" class="thumb" style="display:none;" alt="aperçu" />
+            <p id="upload-msg" class="muted"></p>
+          </div>
+          <div id="not-auth" style="display:block;">
+            <p class="muted">Connecte-toi pour uploader des images.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h3 style="color:#fff;">Règles</h3>
+          <ul class="muted">
+            <li>Pas de contenu NSFW / pornographique — détection automatique.</li>
+            <li>Pas de vol d'oeuvres (respecte les droits d'auteur).</li>
+            <li>Format accepté : PNG / JPG / JPEG / WebP. Taille max : 10 MB.</li>
+          </ul>
+        </div>
+      </aside>
     </div>
+  </section>
 
-    <div class="side">
-      <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Visuel de présentation">
-      <img src="https://via.placeholder.com/300x200" alt="Image 2">
-    </div>
-  </div>
+</div>
 
-  <footer>© 2026 Heivoli Network</footer>
+<div class="side">
+  <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Visuel de présentation">
+  <img src="https://via.placeholder.com/300x200" alt="Image 2">
+</div>
+</div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<footer>© 2026</footer>
 
-  <script>
-  (function(){
-    /* ---------- Onglets ---------- */
-    const tabs = document.querySelectorAll('.tab');
-    const pages = document.querySelectorAll('.page');
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = tab.dataset.page;
-        pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + target));
-        tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.page === target));
-      });
-    });
+<script>
+(function(){
+  // onglets
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  const pages = tabs.map(t => document.getElementById('page-' + t.dataset.page)).filter(Boolean);
+  tabs.forEach(tab => tab.addEventListener('click',()=>{
+    tabs.forEach(t=>t.setAttribute('aria-selected',t===tab));
+    pages.forEach(p=>p.id==='page-'+tab.dataset.page?p.classList.add('active'):p.classList.remove('active'));
+  }));
 
-    /* ---------- Firebase config ---------- */
-    const firebaseConfig = {
-      apiKey: "API_KEY",
-      authDomain: "PROJECT.firebaseapp.com",
-      projectId: "PROJECT",
-      storageBucket: "PROJECT.appspot.com",
-      messagingSenderId: "SENDER_ID",
-      appId: "APP_ID"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const storage = firebase.storage();
-    const db = firebase.firestore();
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_MESSAGING_ID",
+    appId: "YOUR_APP_ID"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const storage = firebase.storage();
+  const db = firebase.firestore();
 
-    /* ---------- Discord OAuth ---------- */
-    const btnDiscord = document.getElementById('btn-discord');
-    const authStatus = document.getElementById('auth-status');
-    const uploadArea = document.getElementById('upload-area');
-    const notAuth = document.getElementById('not-auth');
-    const btnLogout = document.getElementById('btn-logout');
-    const FUNCTION_START_URL = "https://fr-heivoli-network.cloudfunctions.net/discordAuth";
+  // Login simple
+  const btnLogin = document.getElementById('btn-login');
+  const btnLogout = document.getElementById('btn-logout');
+  const pseudoInput = document.getElementById('pseudo');
+  const authStatus = document.getElementById('auth-status');
+  const uploadArea = document.getElementById('upload-area');
+  const notAuth = document.getElementById('not-auth');
 
-    btnDiscord.addEventListener('click', () => {
-      const origin = window.location.origin;
-      const url = FUNCTION_START_URL + '?origin=' + encodeURIComponent(origin);
-      window.open(url,'discord_oauth','width=500,height=700');
-    });
+  btnLogin.addEventListener('click', async()=>{
+    const pseudo = pseudoInput.value.trim();
+    if(!pseudo){ authStatus.textContent="Entre un pseudo"; return; }
+    const user = await auth.signInAnonymously();
+    await db.collection('profiles').doc(user.user.uid).set({pseudo:pseudo});
+    authStatus.textContent = 'Connecté : ' + pseudo;
+    uploadArea.style.display='block';
+    notAuth.style.display='none';
+    btnLogout.style.display='inline-block';
+  });
 
-    window.addEventListener('message', async (e)=>{
-      if(e.origin!==window.location.origin) return;
-      const data = e.data||{};
-      if(data.firebaseToken){
-        try{ await auth.signInWithCustomToken(data.firebaseToken); authStatus.textContent='Connecté !'; }
-        catch(err){ console.error(err); authStatus.textContent='Erreur: '+(err.message||err); }
-      }
-    });
+  btnLogout.addEventListener('click', async()=>{
+    await auth.signOut();
+    authStatus.textContent='';
+    uploadArea.style.display='none';
+    notAuth.style.display='block';
+    btnLogout.style.display='none';
+  });
 
-    btnLogout.addEventListener('click', async ()=>{ await auth.signOut(); });
+  auth.onAuthStateChanged(async(user)=>{
+    if(user){
+      const doc = await db.collection('profiles').doc(user.uid).get();
+      const pseudo = doc.exists?doc.data().pseudo:'Anonyme';
+      authStatus.textContent='Connecté : '+pseudo;
+      uploadArea.style.display='block';
+      notAuth.style.display='none';
+      btnLogout.style.display='inline-block';
+    } else {
+      authStatus.textContent='';
+      uploadArea.style.display='none';
+      notAuth.style.display='block';
+      btnLogout.style.display='none';
+    }
+  });
 
-    auth.onAuthStateChanged(user=>{
-      if(user){ uploadArea.style.display='block'; notAuth.style.display='none'; }
-      else{ uploadArea.style.display='none'; notAuth.style.display='block'; authStatus.textContent=''; }
-    });
-  })();
-  </script>
+  // Upload image
+  const fileInput = document.getElementById('file-input');
+  const preview = document.getElementById('preview');
+  const btnUpload = document.getElementById('btn-upload');
+  const imageTitle = document.getElementById('image-title');
+  const uploadMsg = document.getElementById('upload-msg');
+  let currentFile = null;
+  const MAX_SIZE = 10*1024*1024;
+  const ALLOWED_TYPES = ['image/png','image/jpeg','image/webp'];
+
+  fileInput.addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    if(!ALLOWED_TYPES.includes(f.type)){ uploadMsg.textContent='Type non supporté'; fileInput.value=''; return;}
+    if(f.size>MAX_SIZE){ uploadMsg.textContent='Fichier > 10MB'; fileInput.value=''; return;}
+    currentFile=f;
+    preview.src=URL.createObjectURL(f); preview.style.display='block';
+  });
+
+  btnUpload.addEventListener('click', async()=>{
+    uploadMsg.textContent='';
+    if(!currentFile){ uploadMsg.textContent="Sélectionne une image"; return;}
+    const user = auth.currentUser;
+    if(!user){ uploadMsg.textContent="Connecte-toi d'abord"; return;}
+    const ts = Date.now();
+    const ext = (currentFile.name.split('.').pop()||'png').slice(0,6);
+    const path = `uploads/${user.uid}/${ts}.${ext}`;
+    try{
+      uploadMsg.textContent='Upload…';
+      const snap = await storage.ref(path).put(currentFile);
+      const url = await snap.ref.getDownloadURL();
+      const title = (imageTitle.value||'').slice(0,200);
+      const docProfile = await db.collection('profiles').doc(user.uid).get();
+      const pseudo = docProfile.exists?docProfile.data().pseudo:'Anonyme';
+      await db.collection('uploads').add({uid:user.uid,pseudo:title||pseudo,title:title,path:path,url:url,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+      uploadMsg.textContent='Upload réussi !';
+      fileInput.value=''; preview.style.display='none'; currentFile=null; imageTitle.value='';
+    }catch(e){ console.error(e); uploadMsg.textContent='Erreur upload: '+(e.message||e);}
+  });
+
+})();
+</script>
+
 </body>
 </html>
