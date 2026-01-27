@@ -1,308 +1,279 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Heivoli Network</title>
-  <style>
-    :root {
-      --bg:#000; --panel:#000; --border:#222; --text:#ddd; --muted:#777; --accent:#1f8cff;
-    }
-    body{ margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--text);}
-    a{ color:#aaa; text-decoration:none; } a:hover{ color:#fff; text-decoration:underline; }
-    header{ padding:15px; border-bottom:1px solid var(--border); text-align:center; }
-    .site-title{ font-size:24px; font-weight:bold; color:#fff; margin-bottom:5px; }
-    .tabs{ display:inline-flex; gap:8px; align-items:center; justify-content:center; margin-top:6px; }
-    .tab{ background:transparent; color:var(--muted); border:1px solid transparent; padding:6px 10px; border-radius:6px; font-size:13px; cursor:pointer; }
-    .tab:hover,.tab:focus{ color:#fff; outline:none; border-color:rgba(255,255,255,0.06); }
-    .tab[aria-selected="true"]{ color:#fff; background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.06); }
-    .banner{ width:100%; height:220px; background:url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat; border:1px solid var(--border); margin-bottom:15px; }
-    .container{ max-width:1200px; margin:15px auto; padding:0 15px; display:grid; grid-template-columns:3fr 1fr; gap:15px; }
-    .content{ background:var(--panel); border:1px solid var(--border); padding:15px; font-size:14px; line-height:1.6; min-height:320px; }
-    .content h1{ font-size:18px; margin-top:0; color:#fff; }
-    .side{ display:flex; flex-direction:column; gap:15px; }
-    .side img{ width:100%; height:auto; border:1px solid var(--border); display:block; }
-    footer{ border-top:1px solid var(--border); margin-top:20px; padding:10px 15px; font-size:12px; color:var(--muted); text-align:center; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HN</title>
+<style>
+:root{
+  --bg:#000; --panel:#000; --border:#222; --text:#ddd; --muted:#777; --accent:#1f8cff;
+}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+a{ color:#aaa; text-decoration:none; } a:hover{ color:#fff; text-decoration:underline; }
+header{ padding:15px; border-bottom:1px solid var(--border); text-align:center; }
+.site-title{ font-size:24px; font-weight:bold; color:#fff; margin-bottom:5px; }
+.tabs{ display:inline-flex; gap:8px; align-items:center; justify-content:center; margin-top:6px; }
+.tab{ background:transparent; color:var(--muted); border:1px solid transparent; padding:6px 10px; border-radius:6px; font-size:13px; cursor:pointer; }
+.tab:hover,.tab:focus{ color:#fff; outline:none; border-color:rgba(255,255,255,0.06); }
+.tab[aria-selected="true"]{ color:#fff; background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.06); }
+.banner{ width:100%; height:220px; background:url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat; border:1px solid var(--border); margin-bottom:15px; }
+.container{ max-width:1200px; margin:15px auto; padding:0 15px; display:grid; grid-template-columns:3fr 1fr; gap:15px; }
+.content{ background:var(--panel); border:1px solid var(--border); padding:15px; font-size:14px; line-height:1.6; min-height:320px; }
+.content h1{ font-size:18px; margin-top:0; color:#fff; }
+.side{ display:flex; flex-direction:column; gap:15px; }
+.side img{ width:100%; height:auto; border:1px solid var(--border); display:block; }
+footer{ border-top:1px solid var(--border); margin-top:20px; padding:10px 15px; font-size:12px; color:var(--muted); text-align:center; }
+.community{ display:grid; grid-template-columns:1fr 320px; gap:16px; align-items:start; }
+.card{ background:#050505; border:1px solid var(--border); padding:12px; border-radius:8px; }
+.form-row{ display:flex; gap:8px; margin-bottom:8px; }
+button.primary{ background:var(--accent); color:#fff; padding:8px 10px; border-radius:6px; border:none; cursor:pointer; }
+button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-radius:6px; border:1px solid var(--border); cursor:pointer; }
+.oauth-btn{ display:inline-flex; align-items:center; gap:8px; background:#7289da; color:#fff; padding:10px 12px; border-radius:6px; border:none; cursor:pointer; font-weight:700; }
+.thumb{ max-width:100%; border:1px solid var(--border); border-radius:6px; display:block; margin-top:8px; }
+.muted{ color:var(--muted); font-size:13px; }
 
-    /* Pages */
-    .page { display:none; }
-    .page.active { display:block; }
+/* Art du mois : mise en page */
+.art-feature {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+.art-feature img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+}
+.art-meta { color: var(--muted); }
+.art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.art-grid img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  display: block;
+}
 
-    .community{ display:grid; grid-template-columns:1fr 320px; gap:16px; align-items:start; }
-    .card{ background:#050505; border:1px solid var(--border); padding:12px; border-radius:8px; }
-    .form-row{ display:flex; gap:8px; margin-bottom:8px; }
-    button.primary{ background:var(--accent); color:#fff; padding:8px 10px; border-radius:6px; border:none; cursor:pointer; }
-    button.secondary{ background:transparent; color:#fff; padding:8px 10px; border-radius:6px; border:1px solid var(--border); cursor:pointer; }
-    .oauth-btn{ display:inline-flex; align-items:center; gap:8px; background:#7289da; color:#fff; padding:10px 12px; border-radius:6px; border:none; cursor:pointer; font-weight:700; }
-    .thumb{ max-width:100%; border:1px solid var(--border); border-radius:6px; display:block; margin-top:8px; }
-    .muted{ color:var(--muted); font-size:13px; }
-
-    @media (max-width:900px){ .community{ grid-template-columns:1fr; } .container{ grid-template-columns:1fr; } .side{ order:2; } .content{ order:1; } .banner{ height:160px; } }
-  </style>
+/* Responsive */
+@media (max-width:900px){
+  .community{ grid-template-columns:1fr; }
+  .container{ grid-template-columns:1fr; }
+  .side{ order:2; }
+  .content{ order:1; }
+  .banner{ height:160px; }
+  .art-feature{ grid-template-columns:1fr; }
+  .art-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:480px){ .art-grid{ grid-template-columns:1fr; } }
+</style>
 </head>
 <body>
-  <header>
-    <div class="site-title">Heivoli Network</div>
-    <div class="tabs" role="tablist" aria-label="Navigation principale">
-      <button class="tab" role="tab" aria-selected="true" data-page="home">Accueil</button>
-      <button class="tab" role="tab" aria-selected="false" data-page="about">À propos</button>
-      <button class="tab" role="tab" aria-selected="false" data-page="art">Art du mois</button>
-      <button class="tab" role="tab" aria-selected="false" data-page="contact">Contact</button>
-      <button class="tab" role="tab" aria-selected="false" data-page="community">Communauté</button>
-    </div>
-  </header>
 
-  <div class="container">
-    <div class="content">
-      <div class="banner" aria-hidden="true"></div>
+<header>
+  <div class="site-title">Heivoli Network</div>
+  <div class="tabs" role="tablist" aria-label="Navigation principale">
+    <button class="tab" role="tab" aria-selected="true" data-page="home">Accueil</button>
+    <button class="tab" role="tab" aria-selected="false" data-page="about">À propos</button>
+    <button class="tab" role="tab" aria-selected="false" data-page="art">Art du mois</button>
+    <button class="tab" role="tab" aria-selected="false" data-page="contact">Contact</button>
+    <button class="tab" role="tab" aria-selected="false" data-page="community">Communauté</button>
+  </div>
+</header>
 
-      <!-- Accueil -->
-      <section id="page-home" class="page active">
-        <h1>Bienvenue sur Heivoli Network</h1>
-        <p>Explore notre réseau, découvre les œuvres et rejoins la communauté !</p>
-      </section>
+<div class="container">
+  <div class="content">
 
-      <!-- À propos -->
-      <section id="page-about" class="page">
-        <h1>À propos</h1>
-        <p>Heivoli Network est une plateforme pour partager vos créations visuelles et découvrir celles des autres.</p>
-      </section>
+    <!-- Accueil -->
+    <section id="page-home" class="page active" tabindex="0">
+      <h1>Bienvenue sur Heivoli Network</h1>
+      <p>Site communautaire pour partager vos créations.</p>
+    </section>
 
-      <!-- Art du mois -->
-      <section id="page-art" class="page">
-        <h1>Art du mois</h1>
-        <p>Découvrez la sélection d'œuvres mises en avant ce mois-ci.</p>
-      </section>
+    <!-- À propos -->
+    <section id="page-about" class="page" tabindex="0">
+      <h1>À propos</h1>
+      <p>Heivoli Network est un site pour partager des images, échanger et découvrir des artistes.</p>
+    </section>
 
-      <!-- Contact -->
-      <section id="page-contact" class="page">
-        <h1>Contact</h1>
-        <p>Envoyez-nous vos questions ou suggestions via notre formulaire de contact.</p>
-      </section>
+    <!-- Art du mois -->
+    <section id="page-art" class="page" tabindex="0">
+      <h1>Art du mois</h1>
 
-      <!-- Communauté -->
-      <section id="page-community" class="page">
-        <h1>Communauté</h1>
-        <div class="community">
-          <div>
-            <div class="card" id="auth-card">
-              <h2>Connexion via Discord</h2>
-              <div id="oauth-form">
-                <p class="muted">Connecte-toi avec Discord pour uploader des images sur le site.</p>
-                <div class="form-row">
-                  <button id="btn-discord" class="oauth-btn">
-                    <svg width="20" height="20" viewBox="0 0 245 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill="#fff" d="M104.4 104.8c-5.7 0-10.3 4.9-10.3 11 0 6 4.6 11 10.3 11 5.8 0 10.4-5 10.3-11 .1-6.1-4.5-11-10.3-11zm36.2 0c-5.7 0-10.3 4.9-10.3 11 0 6 4.6 11 10.3 11 5.8 0 10.4-5 10.3-11 .1-6.1-4.5-11-10.3-11z"/>
-                    </svg>
-                    Se connecter avec Discord
-                  </button>
-                </div>
-              </div>
-              <div id="auth-status" class="muted" style="margin-top:8px;"></div>
-            </div>
+      <!-- Exemple featured -->
+      <div class="art-feature">
+        <img src="https://via.placeholder.com/500x300" alt="Art featured">
+        <div class="art-meta">
+          <h3>Titre de l'oeuvre</h3>
+          <p>Par Artiste</p>
+        </div>
+      </div>
 
-            <div class="card" id="upload-card" style="margin-top:12px;">
-              <h2>Uploader une image</h2>
-              <div id="upload-area" style="display:none;">
-                <div class="form-row">
-                  <input id="file-input" type="file" accept="image/*" />
-                </div>
-                <div class="form-row">
-                  <input id="image-title" type="text" placeholder="Titre (optionnel)" />
-                </div>
-                <div>
-                  <button id="btn-upload" class="primary">Uploader</button>
-                  <button id="btn-logout" class="secondary" style="float:right;">Se déconnecter</button>
-                </div>
-                <img id="preview" class="thumb" style="display:none;" alt="aperçu" />
-                <p id="upload-msg" class="muted"></p>
-              </div>
+      <!-- Grille -->
+      <div class="art-grid">
+        <img src="https://via.placeholder.com/150x140" alt="Art 1">
+        <img src="https://via.placeholder.com/150x140" alt="Art 2">
+        <img src="https://via.placeholder.com/150x140" alt="Art 3">
+        <img src="https://via.placeholder.com/150x140" alt="Art 4">
+        <img src="https://via.placeholder.com/150x140" alt="Art 5">
+        <img src="https://via.placeholder.com/150x140" alt="Art 6">
+      </div>
+    </section>
 
-              <div id="not-auth" style="display:block;">
-                <p class="muted">Connecte-toi (Discord) pour uploader des images.</p>
+    <!-- Contact -->
+    <section id="page-contact" class="page" tabindex="0">
+      <h1>Contact</h1>
+      <p>Pour nous contacter : contact@heivoli.com</p>
+    </section>
+
+    <!-- Communauté -->
+    <section id="page-community" class="page" tabindex="0">
+      <h1>Communauté</h1>
+      <div class="community">
+        <div>
+          <div class="card" id="auth-card">
+            <h2 style="color:#fff;">Connexion via Discord</h2>
+            <div id="oauth-form">
+              <p class="muted">Connecte-toi avec Discord pour uploader des images sur le site.</p>
+              <div class="form-row">
+                <button id="btn-discord" class="oauth-btn">
+                  Se connecter avec Discord
+                </button>
               </div>
             </div>
+            <div id="auth-status" class="muted" style="margin-top:8px;"></div>
           </div>
 
-          <aside>
-            <div class="card">
-              <h3>Règles</h3>
-              <ul class="muted">
-                <li>Pas de contenu NSFW / pornographique — détection automatique.</li>
-                <li>Pas de vol d'œuvres (respecte les droits d'auteur).</li>
-                <li>Format accepté : PNG / JPG / JPEG / WebP. Taille max : 10 MB.</li>
-              </ul>
+          <div class="card" id="upload-card" style="margin-top:12px;">
+            <h2 style="color:#fff;">Uploader une image</h2>
+            <div id="upload-area" style="display:none;">
+              <div class="form-row">
+                <input id="file-input" type="file" accept="image/*" />
+              </div>
+              <div class="form-row">
+                <input id="image-title" type="text" placeholder="Titre (optionnel)" />
+              </div>
+              <div>
+                <button id="btn-upload" class="primary">Uploader</button>
+                <button id="btn-logout" class="secondary" style="float:right;">Se déconnecter</button>
+              </div>
+              <img id="preview" class="thumb" style="display:none;" alt="aperçu" />
+              <p id="upload-msg" class="muted"></p>
             </div>
-
-            <div class="card" id="community-feed">
-              <h3>Derniers uploads</h3>
-              <div id="feed-list" class="muted">Chargement…</div>
+            <div id="not-auth" style="display:block;">
+              <p class="muted">Connecte-toi (Discord) pour uploader des images.</p>
             </div>
-          </aside>
+          </div>
         </div>
-      </section>
 
-    </div>
+        <aside>
+          <div class="card">
+            <h3 style="color:#fff;">Règles</h3>
+            <ul class="muted">
+              <li>Pas de contenu NSFW / pornographique — détection automatique.</li>
+              <li>Pas de vol d'oeuvres (respecte les droits d'auteur).</li>
+              <li>Format accepté : PNG / JPG / JPEG / WebP. Taille max : 10 MB.</li>
+            </ul>
+          </div>
 
-    <div class="side">
-      <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Visuel de présentation">
-      <img src="https://via.placeholder.com/300x200" alt="Image 2">
-    </div>
+          <div class="card" id="community-feed">
+            <h3 style="color:#fff;">Derniers uploads</h3>
+            <div id="feed-list" class="muted">Chargement…</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
   </div>
 
-  <footer>© 2026 Heivoli Network</footer>
+  <div class="side">
+    <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Visuel de présentation">
+    <img src="https://via.placeholder.com/300x200" alt="Image 2">
+  </div>
+</div>
 
-  <!-- Firebase client SDK (compat) -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
-  <script src="https://unpkg.com/nsfwjs@2.4.0/dist/nsfwjs.min.js"></script>
+<footer>© 2026</footer>
 
-  <script>
-  (function(){
-    /* ---------- Onglets ---------- */
-    const tabs = Array.from(document.querySelectorAll('.tab'));
-    const pages = tabs.map(t => document.getElementById('page-' + t.dataset.page)).filter(Boolean);
-    function setActive(pageId){
-      tabs.forEach(tab => tab.setAttribute('aria-selected', tab.dataset.page===pageId));
-      pages.forEach(p => p && p.id === 'page-'+pageId ? p.classList.add('active') : p && p.classList.remove('active'));
+<!-- Firebase client SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+<script>
+(function(){
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  const pages = tabs.map(t => document.getElementById('page-' + t.dataset.page)).filter(Boolean);
+  function setActive(pageId){
+    tabs.forEach(tab => tab.setAttribute('aria-selected', tab.dataset.page===pageId));
+    pages.forEach(p => p && p.id === 'page-'+pageId ? p.classList.add('active') : p && p.classList.remove('active'));
+  }
+  tabs.forEach(tab => tab.addEventListener('click',()=>setActive(tab.dataset.page)));
+
+  // Firebase config (à remplacer)
+  const firebaseConfig = {
+    apiKey: "APIKEY",
+    authDomain: "DOMAIN",
+    projectId: "PROJECTID",
+    storageBucket: "STORAGE",
+    messagingSenderId: "ID",
+    appId: "APPID"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const storage = firebase.storage();
+  const db = firebase.firestore();
+
+  // Discord OAuth
+  const FUNCTION_START_URL = "https://YOUR_CLOUD_FUNCTION_URL";
+  const btnDiscord = document.getElementById('btn-discord');
+  const authStatus = document.getElementById('auth-status');
+  const uploadArea = document.getElementById('upload-area');
+  const notAuth = document.getElementById('not-auth');
+  const btnLogout = document.getElementById('btn-logout');
+
+  btnDiscord.addEventListener('click', ()=>{
+    window.open(FUNCTION_START_URL + '?origin=' + encodeURIComponent(window.location.origin),'discord_oauth','width=500,height=700');
+  });
+
+  window.addEventListener('message', async (e)=>{
+    if(e.origin !== window.location.origin) return;
+    const data = e.data || {};
+    if(data.firebaseToken){
+      try{ await auth.signInWithCustomToken(data.firebaseToken); authStatus.textContent='Connexion réussie'; }
+      catch(err){ console.error(err); authStatus.textContent='Erreur connexion'; }
     }
-    tabs.forEach(tab => tab.addEventListener('click', () => setActive(tab.dataset.page)));
-    setActive('home');
+  });
 
-    /* ---------- Firebase config ---------- */
-    const firebaseConfig = {
-      apiKey: "AIzaSyCbC3pZnkq1ZuthER7BkAoRJPn4SPYGXWE",
-      authDomain: "heivoli-network.firebaseapp.com",
-      projectId: "heivoli-network",
-      storageBucket: "heivoli-network.appspot.com",
-      messagingSenderId: "327979808789",
-      appId: "1:327979808789:web:067920981030125a82761c"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const storage = firebase.storage();
-    const db = firebase.firestore();
+  btnLogout.addEventListener('click', async ()=>{ await auth.signOut(); });
 
-    /* ---------- OAuth Discord ---------- */
-    const FUNCTION_START_URL = "https://discord.com/api/oauth2/authorize?client_id=1465787972870869236&redirect_uri=https%3A%2F%2Ffr-heivoli-network.cloudfunctions.net%2FdiscordAuth%2Fcallback&response_type=code&scope=identify";
-    const btnDiscord = document.getElementById('btn-discord');
-    const authStatus = document.getElementById('auth-status');
-    const uploadArea = document.getElementById('upload-area');
-    const notAuth = document.getElementById('not-auth');
-    const btnLogout = document.getElementById('btn-logout');
+  auth.onAuthStateChanged(async (user)=>{
+    if(user){ uploadArea.style.display='block'; notAuth.style.display='none'; authStatus.textContent='Connecté'; }
+    else{ uploadArea.style.display='none'; notAuth.style.display='block'; authStatus.textContent=''; }
+  });
 
-    btnDiscord.addEventListener('click', () => {
-      const origin = window.location.origin;
-      const url = FUNCTION_START_URL + '?origin=' + encodeURIComponent(origin);
-      window.open(url, 'discord_oauth', 'width=500,height=700');
-    });
-
-    window.addEventListener('message', async (e) => {
-      if (e.origin !== window.location.origin) return;
-      const data = e.data || {};
-      if (data.firebaseToken) {
-        try {
-          await auth.signInWithCustomToken(data.firebaseToken);
-          authStatus.textContent = 'Connexion réussie (via Discord).';
-        } catch (err) {
-          console.error(err);
-          authStatus.textContent = 'Erreur connexion: ' + (err.message || err);
-        }
-      }
-    });
-
-    btnLogout.addEventListener('click', async () => await auth.signOut());
-
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        uploadArea.style.display = 'block';
-        notAuth.style.display = 'none';
-        try {
-          const doc = await db.collection('profiles').doc(user.uid).get();
-          const pseudo = doc.exists ? doc.data().pseudo : (user.displayName || user.email || 'DiscordUser');
-          authStatus.textContent = 'Connecté : ' + pseudo;
-        } catch (e) { authStatus.textContent = 'Connecté'; }
-      } else {
-        uploadArea.style.display = 'none';
-        notAuth.style.display = 'block';
-        authStatus.textContent = '';
-      }
-    });
-
-    /* ---------- NSFW + Upload ---------- */
-    let nsfwModel = null;
-    (async()=>{ try{ nsfwModel = await nsfwjs.load(); console.log('NSFW model loaded'); }catch(e){ console.warn(e);} })();
-
-    const fileInput = document.getElementById('file-input');
-    const preview = document.getElementById('preview');
-    const btnUpload = document.getElementById('btn-upload');
-    const imageTitle = document.getElementById('image-title');
-    const uploadMsg = document.getElementById('upload-msg');
-    let currentFile = null;
-    const MAX_SIZE = 10*1024*1024;
-    const ALLOWED_TYPES = ['image/png','image/jpeg','image/webp'];
-
-    fileInput.addEventListener('change', e=>{
-      const f = e.target.files[0];
-      if(!f) return;
-      if(!ALLOWED_TYPES.includes(f.type)){ uploadMsg.textContent='Type non supporté'; fileInput.value=''; return; }
-      if(f.size>MAX_SIZE){ uploadMsg.textContent='Fichier > 10MB'; fileInput.value=''; return; }
-      currentFile=f; preview.src=URL.createObjectURL(f); preview.style.display='block';
-    });
-
-    async function isImageNSFW(file){
-      if(!nsfwModel) return false;
-      try{
-        const img=new Image(); const url=URL.createObjectURL(file);
-        img.src=url; await img.decode();
-        const pred=await nsfwModel.classify(img); URL.revokeObjectURL(url);
-        const p={}; pred.forEach(x=>p[x.className.toLowerCase()]=x.probability);
-        return ((p['porn']||0)>0.15)||((p['hentai']||0)>0.15)||((p['sexy']||0)>0.5);
-      } catch(e){ return false; }
-    }
-
-    btnUpload.addEventListener('click', async()=>{
-      uploadMsg.textContent='';
-      if(!currentFile){ uploadMsg.textContent="Sélectionne une image."; return; }
-      const user=auth.currentUser; if(!user){ uploadMsg.textContent="Connecte-toi d'abord."; return; }
-      uploadMsg.textContent='Vérification NSFW…';
-      const nsfw=await isImageNSFW(currentFile); if(nsfw){ uploadMsg.textContent='Image bloquée (NSFW).'; return; }
-
-      const ts=Date.now();
-      const ext=(currentFile.name.split('.').pop()||'png').slice(0,6);
-      const path=`uploads/${user.uid}/${ts}.${ext}`;
-      try{
-        uploadMsg.textContent='Upload…';
-        const snap=await storage.ref(path).put(currentFile);
-        const url=await snap.ref.getDownloadURL();
-        const title=(imageTitle.value||'').slice(0,200);
-        await db.collection('uploads').add({ uid:user.uid, pseudo:user.displayName||user.email||'DiscordUser', title, path, url, createdAt:firebase.firestore.FieldValue.serverTimestamp() });
-        uploadMsg.textContent='Upload réussi !'; fileInput.value=''; preview.style.display='none'; currentFile=null; imageTitle.value='';
-        loadFeed();
-      } catch(e){ console.error(e); uploadMsg.textContent='Erreur upload: '+(e.message||e); }
-    });
-
-    /* ---------- Feed ---------- */
-    const feedList = document.getElementById('feed-list');
-    async function loadFeed(){
-      feedList.innerHTML='Chargement…';
-      try{
-        const snap=await db.collection('uploads').orderBy('createdAt','desc').limit(12).get();
-        if(snap.empty){ feedList.innerHTML='<p class="muted">Aucun upload pour le moment.</p>'; return; }
-        const html=[];
-        snap.forEach(doc=>{
-          const d=doc.data();
-          html.push(`<div style="margin-bottom:10px;"><a href="${d.url}" target="_blank">${d.title||'Image sans titre'}</a><br><small class="muted">par ${d.pseudo}</small></div>`);
-        });
-        feedList.innerHTML=html.join('');
-      } catch(e){ feedList.innerHTML='Erreur chargement feed'; console.error(e); }
-    }
-    loadFeed();
-
-  })();
-  </script>
+  // Feed
+  const feedList = document.getElementById('feed-list');
+  async function loadFeed(){
+    try{
+      const snap = await db.collection('uploads').orderBy('createdAt','desc').limit(12).get();
+      if(snap.empty){ feedList.innerHTML='<p class="muted">Aucun upload.</p>'; return; }
+      const html=[];
+      snap.forEach(doc=>{ const d=doc.data(); html.push(`<div style="margin-bottom:10px;"><a href="${d.url}" target="_blank"><img src="${d.url}" style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #222;" alt=""><div><strong style="color:#fff;">${d.pseudo}</strong><br><span class="muted">${d.title||'sans titre'}</span></div></a></div>`); });
+      feedList.innerHTML=html.join('');
+    } catch(e){ feedList.innerHTML='<p class="muted">Impossible de charger le feed.</p>'; console.error(e); }
+  }
+  loadFeed();
+})();
+</script>
 </body>
 </html>
+
