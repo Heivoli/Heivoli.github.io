@@ -1,8 +1,20 @@
-FileInputStream serviceAccount =
-new FileInputStream("path/to/serviceAccountKey.json");
+// firebase.js
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-FirebaseOptions options = new FirebaseOptions.Builder()
-  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-  .build();
+const firebaseConfig = {
+  apiKey: "XXX",
+  authDomain: "XXX.firebaseapp.com",
+  projectId: "XXX",
+  storageBucket: "XXX.appspot.com",
+  messagingSenderId: "XXX",
+  appId: "XXX"
+};
 
-FirebaseApp.initializeApp(options);
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
