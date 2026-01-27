@@ -31,6 +31,9 @@
     .thumb{ max-width:100%; border:1px solid var(--border); border-radius:6px; display:block; margin-top:8px; }
     .muted{ color:var(--muted); font-size:13px; }
 
+    .page{ display:none; }
+    .page.active{ display:block; }
+
     @media (max-width:900px){ .community{ grid-template-columns:1fr; } .container{ grid-template-columns:1fr; } .side{ order:2; } .content{ order:1; } .banner{ height:160px; } }
   </style>
 </head>
@@ -39,8 +42,8 @@
 <header>
   <div class="site-title">Heivoli Network</div>
   <div class="tabs" role="tablist" aria-label="Navigation principale">
-    <button class="tab" role="tab" aria-selected="false" data-page="home" id="tab-home">Accueil</button>
-    <button class="tab" role="tab" aria-selected="true" data-page="about" id="tab-about">À propos</button>
+    <button class="tab" role="tab" aria-selected="true" data-page="home" id="tab-home">Accueil</button>
+    <button class="tab" role="tab" aria-selected="false" data-page="about" id="tab-about">À propos</button>
     <button class="tab" role="tab" aria-selected="false" data-page="art" id="tab-art">Art du mois</button>
     <button class="tab" role="tab" aria-selected="false" data-page="contact" id="tab-contact">Contact</button>
     <button class="tab" role="tab" aria-selected="false" data-page="community" id="tab-community">Communauté</button>
@@ -51,7 +54,28 @@
   <div class="content">
     <div class="banner" aria-hidden="true"></div>
 
-    <section id="page-community" class="page active" tabindex="0" aria-labelledby="tab-community">
+    <!-- Pages -->
+    <section id="page-home" class="page active" tabindex="0">
+      <h1>Accueil</h1>
+      <p>Bienvenue sur Heivoli Network.</p>
+    </section>
+
+    <section id="page-about" class="page" tabindex="0">
+      <h1>À propos</h1>
+      <p>Présentation du site...</p>
+    </section>
+
+    <section id="page-art" class="page" tabindex="0">
+      <h1>Art du mois</h1>
+      <p>Galerie du mois...</p>
+    </section>
+
+    <section id="page-contact" class="page" tabindex="0">
+      <h1>Contact</h1>
+      <p>Formulaire / infos de contact...</p>
+    </section>
+
+    <section id="page-community" class="page" tabindex="0">
       <h1>Communauté</h1>
       <div class="community">
         <div>
@@ -108,6 +132,7 @@
         </aside>
       </div>
     </section>
+
   </div>
 
   <div class="side">
@@ -129,11 +154,18 @@
 
 <script>
 (function(){
+
   /* ---------- Onglets ---------- */
   const tabs = Array.from(document.querySelectorAll('.tab'));
   const pages = tabs.map(t => document.getElementById('page-' + t.dataset.page)).filter(Boolean);
-  function setActive(pageId){ tabs.forEach(tab => tab.setAttribute('aria-selected', tab.dataset.page===pageId)); pages.forEach(p => p && p.id === 'page-'+pageId ? p.classList.add('active') : p && p.classList.remove('active')); }
-  setActive('community');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const pageId = tab.dataset.page;
+      tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.page===pageId?'true':'false'));
+      pages.forEach(p => p.id==='page-'+pageId?p.classList.add('active'):p.classList.remove('active'));
+    });
+  });
 
   /* ---------- Firebase config ---------- */
   const firebaseConfig = {
@@ -149,13 +181,13 @@
   const storage = firebase.storage();
   const db = firebase.firestore();
 
-  const FUNCTION_START_URL = "https://fr-heivoli-network.cloudfunctions.net/discordAuth/callback";
+  const FUNCTION_START_URL = "https://discord.com/api/oauth2/authorize?client_id=1465787972870869236&redirect_uri=https%3A%2F%2Ffr-heivoli-network.cloudfunctions.net%2FdiscordAuth%2Fcallback&response_type=code&scope=identify";
 
   /* ---------- NSFW ---------- */
   let nsfwModel = null;
   (async () => { try { nsfwModel = await nsfwjs.load(); } catch(e){ console.warn(e); } })();
 
-  /* ---------- OAuth popup ---------- */
+  /* ---------- OAuth ---------- */
   const btnDiscord = document.getElementById('btn-discord');
   const authStatus = document.getElementById('auth-status');
   const uploadArea = document.getElementById('upload-area');
@@ -164,47 +196,37 @@
 
   btnDiscord.addEventListener('click', () => {
     const url = FUNCTION_START_URL + '?origin=' + encodeURIComponent(window.location.origin);
-    window.open(url, 'discord_oauth', 'width=500,height=700');
+    window.open(url,'discord_oauth','width=500,height=700');
   });
 
-  window.addEventListener('message', async (e) => {
-    if (e.origin !== window.location.origin) return;
-    const data = e.data || {};
-    if (data.firebaseToken) {
-      try {
+  window.addEventListener('message', async e => {
+    if(e.origin!==window.location.origin) return;
+    const data = e.data||{};
+    if(data.firebaseToken){
+      try{
         await auth.signInWithCustomToken(data.firebaseToken);
         authStatus.textContent = 'Connexion réussie (via Discord).';
-      } catch (err) {
-        console.error(err);
-        authStatus.textContent = 'Erreur connexion: ' + (err.message || err);
-      }
+      }catch(err){ console.error(err); authStatus.textContent = 'Erreur connexion: '+(err.message||err); }
     }
   });
 
-  btnLogout.addEventListener('click', async () => { await auth.signOut(); });
+  btnLogout.addEventListener('click', async ()=>{ await auth.signOut(); });
 
-  /* ---------- Auth state ---------- */
-  auth.onAuthStateChanged(async (user) => {
-    if (user) {
-      uploadArea.style.display = 'block';
-      notAuth.style.display = 'none';
-
+  auth.onAuthStateChanged(async user=>{
+    if(user){
+      uploadArea.style.display='block';
+      notAuth.style.display='none';
       const ref = db.collection('profiles').doc(user.uid);
       const snap = await ref.get();
-      if (!snap.exists) {
-        await ref.set({
-          uid: user.uid,
-          provider: "discord",
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
+      if(!snap.exists){
+        await ref.set({ uid:user.uid, provider:"discord", createdAt:firebase.firestore.FieldValue.serverTimestamp() });
       }
-
-      const pseudo = user.displayName || (user.providerData[0] && user.providerData[0].displayName) || 'DiscordUser';
-      authStatus.textContent = 'Connecté : ' + pseudo;
-    } else {
-      uploadArea.style.display = 'none';
-      notAuth.style.display = 'block';
-      authStatus.textContent = '';
+      const pseudo = user.displayName || 'DiscordUser';
+      authStatus.textContent = 'Connecté : '+pseudo;
+    } else{
+      uploadArea.style.display='none';
+      notAuth.style.display='block';
+      authStatus.textContent='';
     }
   });
 
@@ -214,82 +236,69 @@
   const btnUpload = document.getElementById('btn-upload');
   const imageTitle = document.getElementById('image-title');
   const uploadMsg = document.getElementById('upload-msg');
-  let currentFile = null;
-  const MAX_SIZE = 10 * 1024 * 1024;
+  let currentFile=null;
+  const MAX_SIZE = 10*1024*1024;
   const ALLOWED_TYPES = ['image/png','image/jpeg','image/webp'];
 
-  fileInput.addEventListener('change', (e) => {
-    const f = e.target.files[0];
-    if (!f) return;
-    if (!ALLOWED_TYPES.includes(f.type)) { uploadMsg.textContent = 'Type non supporté.'; fileInput.value=''; return; }
-    if (f.size > MAX_SIZE) { uploadMsg.textContent = 'Fichier > 10MB.'; fileInput.value=''; return; }
-    currentFile = f;
-    preview.src = URL.createObjectURL(f); preview.style.display = 'block';
+  fileInput.addEventListener('change', e=>{
+    const f=e.target.files[0];
+    if(!f) return;
+    if(!ALLOWED_TYPES.includes(f.type)){ uploadMsg.textContent='Type non supporté.'; fileInput.value=''; return; }
+    if(f.size>MAX_SIZE){ uploadMsg.textContent='Fichier > 10MB.'; fileInput.value=''; return; }
+    currentFile=f;
+    preview.src=URL.createObjectURL(f); preview.style.display='block';
   });
 
-  async function isImageNSFW(file) {
-    if (!nsfwModel) return false;
-    try {
-      const img = new Image();
-      const url = URL.createObjectURL(file);
-      img.src = url;
+  async function isImageNSFW(file){
+    if(!nsfwModel) return false;
+    try{
+      const img=new Image();
+      const url=URL.createObjectURL(file);
+      img.src=url;
       await img.decode();
-      const predictions = await nsfwModel.classify(img);
+      const predictions=await nsfwModel.classify(img);
       URL.revokeObjectURL(url);
-      const threshold = 0.15;
-      const p = {};
-      predictions.forEach(x => p[x.className.toLowerCase()] = x.probability);
-      return ( (p['porn']||0) > threshold ) || ( (p['hentai']||0) > threshold ) || ( (p['sexy']||0) > 0.5 );
+      const threshold=0.15;
+      const p={};
+      predictions.forEach(x=>p[x.className.toLowerCase()]=x.probability);
+      return ((p['porn']||0)>threshold)||((p['hentai']||0)>threshold)||((p['sexy']||0)>0.5);
     } catch(e){ console.warn(e); return false; }
   }
 
-  btnUpload.addEventListener('click', async () => {
-    uploadMsg.textContent = '';
-    if (!currentFile) { uploadMsg.textContent = "Sélectionne une image."; return; }
-    const user = auth.currentUser;
-    if (!user) { uploadMsg.textContent = "Connecte-toi d'abord."; return; }
+  btnUpload.addEventListener('click', async ()=>{
+    uploadMsg.textContent='';
+    if(!currentFile){ uploadMsg.textContent="Sélectionne une image."; return; }
+    const user=auth.currentUser;
+    if(!user){ uploadMsg.textContent="Connecte-toi d'abord."; return; }
 
-    uploadMsg.textContent = 'Vérification NSFW…';
-    const nsfw = await isImageNSFW(currentFile);
-    if (nsfw) { uploadMsg.textContent = 'Image bloquée (NSFW).'; return; }
+    uploadMsg.textContent='Vérification NSFW…';
+    const nsfw=await isImageNSFW(currentFile);
+    if(nsfw){ uploadMsg.textContent='Image bloquée (NSFW).'; return; }
 
-    const ts = Date.now();
-    const ext = (currentFile.name.split('.').pop() || 'png').slice(0,6);
-    const path = `uploads/${user.uid}/${ts}.${ext}`;
+    const ts=Date.now();
+    const ext=(currentFile.name.split('.').pop()||'png').slice(0,6);
+    const path=`uploads/${user.uid}/${ts}.${ext}`;
 
-    try {
-      uploadMsg.textContent = 'Upload…';
-      const snap = await storage.ref(path).put(currentFile);
-      const url = await snap.ref.getDownloadURL();
-      const title = (imageTitle.value || '').slice(0,200);
-      await db.collection('uploads').add({ uid: user.uid, pseudo: user.displayName || user.email || 'DiscordUser', title: title, path: path, url: url, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-      uploadMsg.textContent = 'Upload réussi !';
-      fileInput.value = ''; preview.style.display = 'none'; currentFile = null; imageTitle.value = '';
+    try{
+      uploadMsg.textContent='Upload…';
+      const snap=await storage.ref(path).put(currentFile);
+      const url=await snap.ref.getDownloadURL();
+      const title=(imageTitle.value||'').slice(0,200);
+      await db.collection('uploads').add({ uid:user.uid, pseudo:user.displayName||'DiscordUser', title, path, url, createdAt:firebase.firestore.FieldValue.serverTimestamp() });
+      uploadMsg.textContent='Upload réussi !';
+      fileInput.value=''; preview.style.display='none'; currentFile=null; imageTitle.value='';
       loadFeed();
-    } catch (e) {
-      console.error(e);
-      uploadMsg.textContent = 'Erreur upload: ' + (e.message || e);
-    }
+    }catch(e){ console.error(e); uploadMsg.textContent='Erreur upload: '+(e.message||e); }
   });
 
   /* ---------- Feed ---------- */
-  const feedList = document.getElementById('feed-list');
+  const feedList=document.getElementById('feed-list');
   async function loadFeed(){
-    feedList.innerHTML = 'Chargement…';
+    feedList.innerHTML='Chargement…';
     try{
-      const snap = await db.collection('uploads').orderBy('createdAt','desc').limit(12).get();
-      if (snap.empty) { feedList.innerHTML = '<p class="muted">Aucun upload pour le moment.</p>'; return; }
-      const html = [];
-      snap.forEach(doc => {
-        const d = doc.data();
+      const snap=await db.collection('uploads').orderBy('createdAt','desc').limit(12).get();
+      if(snap.empty){ feedList.innerHTML='<p class="muted">Aucun upload pour le moment.</p>'; return; }
+      const html=[];
+      snap.forEach(doc=>{
+        const d=doc.data();
         html.push(`<div style="margin-bottom:10px;"><a href="${d.url||'#'}" target="_blank" rel="noopener" style="display:flex;gap:8px;"><img src="${d.url||'#'}" style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #222;" alt=""><div><strong style="color:#fff;">${d.pseudo||'Anonyme'}</strong><br><span class="muted">${d.title?d.title:'<em>sans titre</em>'}</span></div></a></div>`);
-      });
-      feedList.innerHTML = html.join('');
-    } catch(e) { console.error(e); feedList.innerHTML = '<p class="muted">Impossible de charger le feed.</p>'; }
-  }
-  loadFeed();
-
-})();
-</script>
-</body>
-</html>
