@@ -119,6 +119,7 @@ button.secondary{background:transparent;color:#fff;padding:8px 10px;border-radiu
 
 <footer>© 2026</footer>
 
+<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
@@ -126,15 +127,26 @@ button.secondary{background:transparent;color:#fff;padding:8px 10px;border-radiu
 
 <script>
 (function(){
-  // Onglets
+  // ====== Onglets ======
   const tabs=document.querySelectorAll('.tab');
-  tabs.forEach(tab=>tab.addEventListener('click',()=>{setActive(tab.dataset.page)}));
-  function setActive(page){
-    tabs.forEach(t=>t.setAttribute('aria-selected',t.dataset.page===page));
-    document.querySelectorAll('.page').forEach(p=>p.id==='page-'+page ? p.classList.add('active') : p.classList.remove('active'));
-  }
+  const pages={
+    home: document.getElementById('page-home'),
+    about: document.getElementById('page-about'),
+    art: document.getElementById('page-art'),
+    community: document.getElementById('page-community'),
+    artcommunity: document.getElementById('page-artcommunity')
+  };
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      tabs.forEach(t=>t.setAttribute('aria-selected',t===tab));
+      Object.keys(pages).forEach(key=>{
+        if(key===tab.dataset.page) pages[key].classList.add('active');
+        else pages[key].classList.remove('active');
+      });
+    });
+  });
 
-  // Firebase config (remplace par ton config)
+  // ====== Firebase config ======
 const firebaseConfig = {
   apiKey: "AIzaSyCbC3pZnkq1ZuthER7BkAoRJPn4SPYGXWE",
   authDomain: "heivoli-network.firebaseapp.com",
@@ -144,13 +156,12 @@ const firebaseConfig = {
   appId: "1:327979808789:web:067920981030125a82761c",
   measurementId: "G-DH7T98RNT8"
 };
-  };
   firebase.initializeApp(firebaseConfig);
   const auth=firebase.auth();
   const db=firebase.firestore();
   const storage=firebase.storage();
 
-  // Auth pseudo+mot de passe
+  // ====== Auth pseudo+mot de passe ======
   const pseudoInput=document.getElementById('pseudo');
   const passwordInput=document.getElementById('password');
   const btnRegister=document.getElementById('btn-register');
@@ -159,24 +170,27 @@ const firebaseConfig = {
   const uploadCard=document.getElementById('upload-card');
 
   btnRegister.addEventListener('click',async()=>{
-    const email=pseudoInput.value+'@dummy.com';
+    const pseudo=pseudoInput.value;
     const password=passwordInput.value;
-    if(!pseudoInput.value||!password){authStatus.textContent='Pseudo et mot de passe requis';return;}
+    if(!pseudo||!password){authStatus.textContent='Pseudo et mot de passe requis';return;}
+    const email=pseudo+'@dummy.com';
     try{
       const user=await auth.createUserWithEmailAndPassword(email,password);
-      await db.collection('profiles').doc(user.user.uid).set({pseudo:pseudoInput.value});
+      await db.collection('profiles').doc(user.user.uid).set({pseudo});
       authStatus.textContent='Compte créé !';
     }catch(e){authStatus.textContent='Erreur : '+e.message;}
   });
 
   btnLogin.addEventListener('click',async()=>{
-    const email=pseudoInput.value+'@dummy.com';
+    const pseudo=pseudoInput.value;
     const password=passwordInput.value;
-    try{await auth.signInWithEmailAndPassword(email,password);}catch(e){authStatus.textContent='Erreur : '+e.message;}
+    const email=pseudo+'@dummy.com';
+    try{await auth.signInWithEmailAndPassword(email,password);}
+    catch(e){authStatus.textContent='Erreur : '+e.message;}
   });
 
   auth.onAuthStateChanged(user=>{
-    if(user){uploadCard.style.display='block'; authStatus.textContent='Connecté';}
+    if(user){uploadCard.style.display='block'; authStatus.textContent='Connecté : '+user.email;}
     else{uploadCard.style.display='none'; authStatus.textContent='';}
   });
 })();
