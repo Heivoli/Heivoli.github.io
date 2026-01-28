@@ -143,3 +143,29 @@ button.secondary{background:transparent;color:#fff;padding:8px 10px;border-radiu
 
 </body>
 </html>
+
+<script>
+  // Gestion des onglets
+  const tabs = document.querySelectorAll('.tab');
+  const pages = {
+    home: document.getElementById('page-home'),
+    about: document.getElementById('page-about'),
+    art: document.getElementById('page-art'),
+    community: document.getElementById('page-community'),
+    artcommunity: document.getElementById('page-artcommunity')
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Mettre à jour l'onglet sélectionné
+      tabs.forEach(t => t.setAttribute('aria-selected', t === tab));
+
+      // Afficher la page correspondante et cacher les autres
+      Object.keys(pages).forEach(key => {
+        if(key === tab.dataset.page) pages[key].classList.add('active');
+        else pages[key].classList.remove('active');
+      });
+    });
+  });
+</script>
+
