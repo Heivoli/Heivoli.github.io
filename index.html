@@ -1,164 +1,170 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heivoli Network</title>
+
 <style>
 :root{
-  --bg:#000; --panel:#111; --border:#222; --text:#ddd; --muted:#777; --accent:#1f8cff;
+  --bg:#000; --panel:#0b0b0b; --border:#222;
+  --text:#ddd; --muted:#777; --accent:#1f8cff;
 }
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);}
-a{color:#aaa;text-decoration:none;} a:hover{color:#fff;text-decoration:underline;}
-header{padding:15px;border-bottom:1px solid var(--border);text-align:center;}
-.site-title{font-size:24px;font-weight:bold;color:#fff;margin-bottom:5px;}
-.tabs{display:inline-flex;gap:8px;align-items:center;justify-content:center;margin-top:6px;}
-.tab{background:transparent;color:var(--muted);border:1px solid transparent;padding:6px 10px;border-radius:6px;font-size:13px;cursor:pointer;}
-.tab:hover,.tab:focus{color:#fff;outline:none;border-color:rgba(255,255,255,0.06);}
-.tab[aria-selected="true"]{color:#fff;background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);}
-.banner{width:100%;height:220px;background:url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat;border:1px solid var(--border);margin-bottom:15px;}
-.container{max-width:1200px;margin:15px auto;padding:0 15px;display:grid;grid-template-columns:3fr 1fr;gap:15px;}
-.content{background:var(--panel);border:1px solid var(--border);padding:15px;font-size:14px;line-height:1.6;min-height:320px;}
-.content h1{font-size:18px;margin-top:0;color:#fff;}
-.side{display:flex;flex-direction:column;gap:15px;}
-.side img{width:100%;height:auto;border:1px solid var(--border);display:block;}
-footer{border-top:1px solid var(--border);margin-top:20px;padding:10px 15px;font-size:12px;color:var(--muted);text-align:center;}
-.page{display:none;}
-.page.active{display:block;}
-.card{background:#050505;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:12px;}
-.form-row{display:flex;gap:8px;margin-bottom:8px;}
-input[type=text], input[type=password]{flex:1;padding:6px 8px;border-radius:6px;border:1px solid var(--border);background:#111;color:#ddd;}
-button.primary{background:var(--accent);color:#fff;padding:8px 10px;border-radius:6px;border:none;cursor:pointer;}
-button.secondary{background:transparent;color:#fff;padding:8px 10px;border-radius:6px;border:1px solid var(--border);cursor:pointer;}
-.thumb{max-width:100%;border:1px solid var(--border);border-radius:6px;display:block;margin-top:8px;}
-.muted{color:var(--muted);font-size:13px;}
-.art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.art-grid img{width:100%;height:140px;object-fit:cover;border-radius:6px;border:1px solid var(--border);}
-@media(max-width:900px){.container{grid-template-columns:1fr;}.side{order:2;}.content{order:1;}.art-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:480px){.art-grid{grid-template-columns:1fr;}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);}
+
+header{text-align:center;padding:15px;border-bottom:1px solid var(--border);}
+.site-title{font-size:26px;color:#fff;font-weight:bold}
+
+.tabs{margin-top:10px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.tab{
+  background:transparent;border:1px solid var(--border);
+  color:var(--muted);padding:6px 10px;border-radius:6px;
+  cursor:pointer;font-size:13px;
+}
+.tab.active{background:#111;color:#fff}
+
+.banner{
+  width:100%;height:220px;
+  background:url("https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png") center/cover no-repeat;
+  border-bottom:1px solid var(--border);
+}
+
+.container{
+  max-width:1200px;margin:15px auto;
+  padding:0 15px;
+  display:grid;grid-template-columns:3fr 1fr;gap:15px;
+}
+
+.content{background:var(--panel);border:1px solid var(--border);padding:15px}
+.side{display:flex;flex-direction:column;gap:15px}
+
+.page{display:none}
+.page.active{display:block}
+
+.card{
+  background:#050505;border:1px solid var(--border);
+  padding:12px;border-radius:8px;margin-bottom:12px;
+}
+
+input,button{
+  padding:7px;border-radius:6px;
+  border:1px solid var(--border);
+  background:#111;color:#ddd;
+}
+
+button{cursor:pointer}
+button.primary{background:var(--accent);border:none}
+button.secondary{background:#111}
+
+.form-row{display:flex;gap:8px;margin-bottom:8px}
+.muted{color:var(--muted);font-size:13px}
+
+.art-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:12px;
+}
+.art-grid img{
+  width:100%;height:140px;object-fit:cover;
+  border-radius:6px;border:1px solid var(--border);
+}
+
+.thumb{max-width:100%;margin-top:8px;border-radius:6px}
+
+@media(max-width:900px){
+  .container{grid-template-columns:1fr}
+}
 </style>
 </head>
+
 <body>
 
 <header>
   <div class="site-title">Heivoli Network</div>
-  <div class="tabs" role="tablist">
-    <button class="tab" data-page="home" aria-selected="true">Accueil</button>
-    <button class="tab" data-page="about" aria-selected="false">À propos</button>
-    <button class="tab" data-page="art" aria-selected="false">Art du mois</button>
-    <button class="tab" data-page="community" aria-selected="false">Communauté</button>
-    <button class="tab" data-page="artcommunity" aria-selected="false">Art de la communauté</button>
+  <div class="tabs">
+    <button class="tab active" data-page="home">Accueil</button>
+    <button class="tab" data-page="about">À propos</button>
+    <button class="tab" data-page="community">Communauté</button>
+    <button class="tab" data-page="artcommunity">Art de la communauté</button>
   </div>
 </header>
 
+<div class="banner"></div>
+
 <div class="container">
   <div class="content">
-    <div class="banner" aria-hidden="true"></div>
 
-    <!-- Accueil -->
-    <section id="page-home" class="page active">
-      <h1>Accueil</h1>
-      <p>Bienvenue sur Heivoli Network !</p>
+    <!-- ACCUEIL -->
+    <section id="home" class="page active">
+      <h2>Bienvenue</h2>
+      <p>Bienvenue sur Heivoli Network.</p>
     </section>
 
-    <!-- À propos -->
-    <section id="page-about" class="page">
-      <h1>À propos</h1>
-      <p>Présentation du site et de la communauté.</p>
+    <!-- A PROPOS -->
+    <section id="about" class="page">
+      <h2>À propos</h2>
+      <p>Plateforme communautaire pour partager des créations.</p>
     </section>
 
-    <!-- Art du mois -->
-    <section id="page-art" class="page">
-      <h1>Art du mois</h1>
-      <div class="art-grid">
-        <img src="https://via.placeholder.com/200x140" alt="">
-        <img src="https://via.placeholder.com/200x140" alt="">
-        <img src="https://via.placeholder.com/200x140" alt="">
-      </div>
-    </section>
+    <!-- COMMUNAUTÉ -->
+    <section id="community" class="page">
+      <h2>Communauté</h2>
 
-    <!-- Communauté -->
-    <section id="page-community" class="page">
-      <h1>Communauté</h1>
-      <div class="card" id="auth-card">
-        <h2>Connexion / Inscription</h2>
-        <div class="form-row"><input type="text" id="pseudo" placeholder="Pseudo"></div>
-        <div class="form-row"><input type="password" id="password" placeholder="Mot de passe"></div>
+      <div class="card">
+        <h3>Connexion</h3>
         <div class="form-row">
-          <button id="btn-register" class="primary">Créer un compte</button>
-          <button id="btn-login" class="secondary">Se connecter</button>
+          <input id="email" type="email" placeholder="Email">
+          <input id="password" type="password" placeholder="Mot de passe">
         </div>
-        <div id="auth-status" class="muted"></div>
+        <div class="form-row">
+          <button id="login" class="primary">Connexion</button>
+          <button id="register" class="secondary">Créer un compte</button>
+        </div>
+        <div id="auth-msg" class="muted"></div>
       </div>
 
-      <div class="card" id="upload-card" style="display:none;">
-        <h2>Uploader une image</h2>
-        <div class="form-row"><input id="file-input" type="file" accept="image/*"></div>
-        <div class="form-row"><input id="image-title" type="text" placeholder="Titre (optionnel)"></div>
-        <div>
-          <button id="btn-upload" class="primary">Uploader</button>
-          <button id="btn-logout" class="secondary" style="float:right;">Se déconnecter</button>
-        </div>
-        <img id="preview" class="thumb" style="display:none;" alt="aperçu">
-        <p id="upload-msg" class="muted"></p>
+      <div id="upload-card" class="card" style="display:none">
+        <h3>Publier un dessin</h3>
+        <input id="file" type="file" accept="image/*">
+        <input id="title" type="text" placeholder="Titre (optionnel)">
+        <button id="upload" class="primary">Uploader</button>
+        <div id="loader" class="muted" style="display:none">⏳ Upload en cours…</div>
+        <div id="upload-msg" class="muted"></div>
+        <img id="preview" class="thumb" style="display:none">
       </div>
     </section>
 
-    <!-- Art de la communauté -->
-    <section id="page-artcommunity" class="page">
-      <h1>Art de la communauté</h1>
-      <div id="community-art-grid" class="art-grid">Chargement…</div>
+    <!-- ART COMMUNAUTÉ -->
+    <section id="artcommunity" class="page">
+      <h2>Art de la communauté</h2>
+      <div id="art-grid" class="art-grid">Chargement…</div>
     </section>
+
   </div>
 
+  <!-- SIDE -->
   <div class="side">
-    <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Visuel">
-    <img src="https://via.placeholder.com/300x200" alt="Image 2">
-
-    <!-- Règles de la communauté -->
     <div class="card">
-      <h3 style="color:#fff;">Règles de la communauté</h3>
+      <h3>Règles</h3>
       <ul class="muted">
-        <li>Pas de contenu NSFW / pornographique — détection automatique.</li>
-        <li>Pas de vol d'œuvres — respecte les droits d'auteur.</li>
-        <li>Formats acceptés : PNG / JPG / JPEG / WebP.</li>
-        <li>Taille max : 10 MB par image.</li>
+        <li>❌ NSFW interdit</li>
+        <li>❌ Vol d'œuvres interdit</li>
+        <li>✅ PNG / JPG / WebP</li>
+        <li>📦 10 Mo max</li>
       </ul>
     </div>
   </div>
 </div>
 
-<footer>© 2026</footer>
-
-<!-- Firebase SDK -->
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
 
 <script>
-(function(){
-  // Onglets
-  const tabs=document.querySelectorAll('.tab');
-  const pages={
-    home: document.getElementById('page-home'),
-    about: document.getElementById('page-about'),
-    art: document.getElementById('page-art'),
-    community: document.getElementById('page-community'),
-    artcommunity: document.getElementById('page-artcommunity')
-  };
-  tabs.forEach(tab=>{
-    tab.addEventListener('click',()=>{
-      tabs.forEach(t=>t.setAttribute('aria-selected',t===tab));
-      Object.keys(pages).forEach(key=>{
-        if(key===tab.dataset.page) pages[key].classList.add('active');
-        else pages[key].classList.remove('active');
-      });
-    });
-  });
-
-  // Firebase config
+// 🔴 REMPLACE PAR TA CONFIG FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCbC3pZnkq1ZuthER7BkAoRJPn4SPYGXWE",
   authDomain: "heivoli-network.firebaseapp.com",
@@ -168,88 +174,61 @@ const firebaseConfig = {
   appId: "1:327979808789:web:067920981030125a82761c",
   measurementId: "G-DH7T98RNT8"
 };
-  firebase.initializeApp(firebaseConfig);
-  const auth=firebase.auth();
-  const db=firebase.firestore();
-  const storage=firebase.storage();
 
-  // Auth pseudo + mot de passe
-  const pseudoInput=document.getElementById('pseudo');
-  const passwordInput=document.getElementById('password');
-  const btnRegister=document.getElementById('btn-register');
-  const btnLogin=document.getElementById('btn-login');
-  const authStatus=document.getElementById('auth-status');
-  const uploadCard=document.getElementById('upload-card');
+const auth = firebase.auth();
+const db = firebase.firestore();
+const storage = firebase.storage();
 
-  btnRegister.addEventListener('click',async()=>{
-    const pseudo=pseudoInput.value;
-    const password=passwordInput.value;
-    if(!pseudo||!password){authStatus.textContent='Pseudo et mot de passe requis';return;}
-    const email=pseudo+'@dummy.com';
-    try{
-      const user=await auth.createUserWithEmailAndPassword(email,password);
-      await db.collection('profiles').doc(user.user.uid).set({pseudo});
-      authStatus.textContent='Compte créé !';
-    }catch(e){authStatus.textContent='Erreur : '+e.message;}
-  });
-
-  btnLogin.addEventListener('click',async()=>{
-    const pseudo=pseudoInput.value;
-    const password=passwordInput.value;
-    const email=pseudo+'@dummy.com';
-    try{await auth.signInWithEmailAndPassword(email,password);}
-    catch(e){authStatus.textContent='Erreur : '+e.message;}
-  });
-
-  auth.onAuthStateChanged(user=>{
-    if(user){uploadCard.style.display='block'; authStatus.textContent='Connecté : '+user.email;}
-    else{uploadCard.style.display='none'; authStatus.textContent='';}
-  });
-
-  // Upload
-  const fileInput=document.getElementById('file-input');
-  const btnUpload=document.getElementById('btn-upload');
-  const uploadMsg=document.getElementById('upload-msg');
-  const preview=document.getElementById('preview');
-  const imageTitle=document.getElementById('image-title');
-  const communityGrid=document.getElementById('community-art-grid');
-  let currentFile=null;
-
-  fileInput.addEventListener('change',e=>{
-    currentFile=e.target.files[0];
-    if(!currentFile) return;
-    preview.src=URL.createObjectURL(currentFile);
-    preview.style.display='block';
-  });
-
-  btnUpload.addEventListener('click',async()=>{
-    const user=auth.currentUser;
-    if(!user){uploadMsg.textContent="Connecte-toi d'abord"; return;}
-    if(!currentFile){uploadMsg.textContent="Choisis une image"; return;}
-    try{
-      uploadMsg.textContent="Upload en cours…";
-      const path=`uploads/${user.uid}/${Date.now()}_${currentFile.name}`;
-      const snap=await storage.ref(path).put(currentFile);
-      const url=await snap.ref.getDownloadURL();
-      await db.collection('uploads').add({uid:user.uid,title:imageTitle.value||'',url:url,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-      uploadMsg.textContent="Upload réussi ✅";
-      fileInput.value=''; preview.style.display='none'; currentFile=null;
-      loadCommunityArt();
-    }catch(e){uploadMsg.textContent="Erreur upload : "+e.message;}
-  });
-
-  async function loadCommunityArt(){
-    communityGrid.innerHTML="Chargement…";
-    try{
-      const snap=await db.collection('uploads').orderBy('createdAt','desc').limit(20).get();
-      if(snap.empty){communityGrid.innerHTML="<p class='muted'>Aucun dessin pour l’instant.</p>"; return;}
-      const html=[];
-      snap.forEach(doc=>{const d=doc.data(); html.push(`<img src="${d.url}" alt="">`);});
-      communityGrid.innerHTML=html.join('');
-    }catch(e){communityGrid.innerHTML="<p class='muted'>Erreur de chargement.</p>"; console.error(e);}
+// ONGLET
+document.querySelectorAll(".tab").forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.page).classList.add("active");
   }
-  loadCommunityArt();
-})();
+});
+
+// AUTH
+login.onclick=()=>auth.signInWithEmailAndPassword(email.value,password.value)
+  .catch(e=>authMsg.textContent=e.message);
+
+register.onclick=()=>auth.createUserWithEmailAndPassword(email.value,password.value)
+  .catch(e=>authMsg.textContent=e.message);
+
+auth.onAuthStateChanged(u=>{
+  upload-card.style.display = u ? "block":"none";
+});
+
+// UPLOAD
+upload.onclick=async()=>{
+  if(!file.files[0]) return;
+  loader.style.display="block";
+
+  const ref=storage.ref("uploads/"+Date.now());
+  await ref.put(file.files[0]);
+  const url=await ref.getDownloadURL();
+
+  await db.collection("uploads").add({
+    url, createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  loader.style.display="none";
+  uploadMsg.textContent="✅ Publié";
+  loadArt();
+};
+
+// LOAD ART
+async function loadArt(){
+  art-grid.innerHTML="";
+  const snap=await db.collection("uploads").orderBy("createdAt","desc").get();
+  snap.forEach(d=>{
+    const img=document.createElement("img");
+    img.src=d.data().url;
+    art-grid.appendChild(img);
+  });
+}
+loadArt();
 </script>
 
 </body>
