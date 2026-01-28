@@ -1,3 +1,10 @@
+const uploadCard = document.getElementById("upload-card");
+const authMsg = document.getElementById("auth-msg");
+const artGrid = document.getElementById("art-grid");
+const loader = document.getElementById("loader");
+const uploadMsg = document.getElementById("upload-msg");
+const fileInput = document.getElementById("file");
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -197,7 +204,7 @@ register.onclick=()=>auth.createUserWithEmailAndPassword(email.value,password.va
   .catch(e=>authMsg.textContent=e.message);
 
 auth.onAuthStateChanged(u=>{
-  upload-card.style.display = u ? "block":"none";
+  uploadCard.style.display = u ? "block" : "none";
 });
 
 // UPLOAD
@@ -220,7 +227,7 @@ upload.onclick=async()=>{
 
 // LOAD ART
 async function loadArt(){
-  art-grid.innerHTML="";
+ artGrid.innerHTML = "";
   const snap=await db.collection("uploads").orderBy("createdAt","desc").get();
   snap.forEach(d=>{
     const img=document.createElement("img");
