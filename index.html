@@ -4,196 +4,142 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heivoli Network</title>
-
 <style>
 :root{
-  --bg:#000; --panel:#111; --border:#222;
-  --text:#ddd; --muted:#777; --accent:#1f8cff;
+  --bg:#000; --panel:#111; --border:#222; --text:#ddd; --muted:#777; --accent:#1f8cff;
 }
 body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);}
 a{color:#aaa;text-decoration:none;} a:hover{color:#fff;text-decoration:underline;}
 header{padding:15px;border-bottom:1px solid var(--border);text-align:center;}
-.site-title{font-size:24px;font-weight:bold;color:#fff;}
-.tabs{display:inline-flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center;}
-.tab{background:none;color:var(--muted);border:1px solid transparent;padding:6px 10px;border-radius:6px;cursor:pointer;}
-.tab[aria-selected="true"]{color:#fff;background:#111;border-color:#333;}
-.banner{height:220px;background:url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover;border:1px solid var(--border);margin-bottom:15px;}
-.container{max-width:1200px;margin:auto;padding:15px;display:grid;grid-template-columns:3fr 1fr;gap:15px;}
-.content{background:var(--panel);border:1px solid var(--border);padding:15px;}
+.site-title{font-size:24px;font-weight:bold;color:#fff;margin-bottom:5px;}
+.tabs{display:inline-flex;gap:8px;align-items:center;justify-content:center;margin-top:6px;}
+.tab{background:transparent;color:var(--muted);border:1px solid transparent;padding:6px 10px;border-radius:6px;font-size:13px;cursor:pointer;}
+.tab:hover,.tab:focus{color:#fff;outline:none;border-color:rgba(255,255,255,0.06);}
+.tab[aria-selected="true"]{color:#fff;background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);}
+.banner{width:100%;height:220px;background:url('https://i.postimg.cc/QC7rH0qg/Heivoli-Network.png') center/cover no-repeat;border:1px solid var(--border);margin-bottom:15px;}
+.container{max-width:1200px;margin:15px auto;padding:0 15px;display:grid;grid-template-columns:3fr 1fr;gap:15px;}
+.content{background:var(--panel);border:1px solid var(--border);padding:15px;font-size:14px;line-height:1.6;min-height:320px;}
+.content h1{font-size:18px;margin-top:0;color:#fff;}
+.side{display:flex;flex-direction:column;gap:15px;}
+.side img{width:100%;height:auto;border:1px solid var(--border);display:block;}
+footer{border-top:1px solid var(--border);margin-top:20px;padding:10px 15px;font-size:12px;color:var(--muted);text-align:center;}
 .page{display:none;}
 .page.active{display:block;}
 .card{background:#050505;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:12px;}
-input,button{padding:8px;border-radius:6px;border:1px solid var(--border);background:#111;color:#ddd;}
-button.primary{background:var(--accent);border:none;cursor:pointer;}
-button.secondary{background:#111;cursor:pointer;}
 .form-row{display:flex;gap:8px;margin-bottom:8px;}
+input[type=text], input[type=password]{flex:1;padding:6px 8px;border-radius:6px;border:1px solid var(--border);background:#111;color:#ddd;}
+button.primary{background:var(--accent);color:#fff;padding:8px 10px;border-radius:6px;border:none;cursor:pointer;}
+button.secondary{background:transparent;color:#fff;padding:8px 10px;border-radius:6px;border:1px solid var(--border);cursor:pointer;}
+.thumb{max-width:100%;border:1px solid var(--border);border-radius:6px;display:block;margin-top:8px;}
 .muted{color:var(--muted);font-size:13px;}
 .art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .art-grid img{width:100%;height:140px;object-fit:cover;border-radius:6px;border:1px solid var(--border);}
-.side{display:flex;flex-direction:column;gap:15px;}
-footer{text-align:center;font-size:12px;color:var(--muted);padding:10px;border-top:1px solid var(--border);}
-@media(max-width:900px){
-  .container{grid-template-columns:1fr;}
-  .art-grid{grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:500px){
-  .art-grid{grid-template-columns:1fr;}
-}
+@media(max-width:900px){.container{grid-template-columns:1fr;}.side{order:2;}.content{order:1;}.art-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.art-grid{grid-template-columns:1fr;}}
 </style>
 </head>
-
 <body>
 
 <header>
   <div class="site-title">Heivoli Network</div>
-  <div class="tabs">
+  <div class="tabs" role="tablist">
     <button class="tab" data-page="home" aria-selected="true">Accueil</button>
-    <button class="tab" data-page="about">À propos</button>
-    <button class="tab" data-page="art">Art du mois</button>
-    <button class="tab" data-page="community">Communauté</button>
-    <button class="tab" data-page="artcommunity">Art de la communauté</button>
+    <button class="tab" data-page="about" aria-selected="false">À propos</button>
+    <button class="tab" data-page="art" aria-selected="false">Art du mois</button>
+    <button class="tab" data-page="community" aria-selected="false">Communauté</button>
+    <button class="tab" data-page="artcommunity" aria-selected="false">Art de la communauté</button>
   </div>
 </header>
 
 <div class="container">
-<div class="content">
+  <div class="content">
+    <div class="banner" aria-hidden="true"></div>
 
-<div class="banner"></div>
+    <!-- Accueil -->
+    <section id="page-home" class="page active">
+      <h1>Accueil</h1>
+      <p>Bienvenue sur Heivoli Network !</p>
+    </section>
 
-<section id="page-home" class="page active">
-  <h1>Accueil</h1>
-  <p>Bienvenue sur Heivoli Network.</p>
-</section>
+    <!-- À propos -->
+    <section id="page-about" class="page">
+      <h1>À propos</h1>
+      <p>Présentation du site et de la communauté.</p>
+    </section>
 
-<section id="page-about" class="page">
-  <h1>À propos</h1>
-  <p>Communauté artistique indépendante.</p>
-</section>
+    <!-- Art du mois -->
+    <section id="page-art" class="page">
+      <h1>Art du mois</h1>
+      <div class="art-grid">
+        <img src="https://via.placeholder.com/200x140" alt="">
+        <img src="https://via.placeholder.com/200x140" alt="">
+        <img src="https://via.placeholder.com/200x140" alt="">
+      </div>
+    </section>
 
-<section id="page-art" class="page">
-  <h1>Art du mois</h1>
-  <div class="art-grid">
-    <img src="https://via.placeholder.com/300">
-    <img src="https://via.placeholder.com/300">
-    <img src="https://via.placeholder.com/300">
+    <!-- Communauté -->
+    <section id="page-community" class="page">
+      <h1>Communauté</h1>
+      <div class="card" id="auth-card">
+        <h2>Connexion / Inscription</h2>
+        <div class="form-row"><input type="text" id="pseudo" placeholder="Pseudo"></div>
+        <div class="form-row"><input type="password" id="password" placeholder="Mot de passe"></div>
+        <div class="form-row">
+          <button id="btn-register" class="primary">Créer un compte</button>
+          <button id="btn-login" class="secondary">Se connecter</button>
+        </div>
+        <div id="auth-status" class="muted"></div>
+      </div>
+
+      <div class="card" id="upload-card" style="display:none;">
+        <h2>Uploader une image</h2>
+        <div class="form-row"><input id="file-input" type="file" accept="image/*"></div>
+        <div class="form-row"><input id="image-title" type="text" placeholder="Titre (optionnel)"></div>
+        <div>
+          <button id="btn-upload" class="primary">Uploader</button>
+          <button id="btn-logout" class="secondary" style="float:right;">Se déconnecter</button>
+        </div>
+        <img id="preview" class="thumb" style="display:none;" alt="aperçu">
+        <p id="upload-msg" class="muted"></p>
+      </div>
+    </section>
+
+    <!-- Art de la communauté -->
+    <section id="page-artcommunity" class="page">
+      <h1>Art de la communauté</h1>
+      <div id="community-art-grid" class="art-grid">Chargement…</div>
+    </section>
   </div>
-</section>
 
-<section id="page-community" class="page">
-  <h1>Communauté</h1>
+  <div class="side">
+    <img src="https://i.postimg.cc/pd1StKtf/Design-sans-titre-(56).png" alt="Visuel">
+    <img src="https://via.placeholder.com/300x200" alt="Image 2">
 
-  <div class="card" id="auth-card">
-    <h3>Connexion / Inscription</h3>
-    <div class="form-row">
-      <input id="pseudo" placeholder="Pseudo">
-      <input id="password" type="password" placeholder="Mot de passe">
+    <!-- Règles de la communauté -->
+    <div class="card">
+      <h3 style="color:#fff;">Règles de la communauté</h3>
+      <ul class="muted">
+        <li>Pas de contenu NSFW / pornographique — détection automatique.</li>
+        <li>Pas de vol d'œuvres — respecte les droits d'auteur.</li>
+        <li>Formats acceptés : PNG / JPG / JPEG / WebP.</li>
+        <li>Taille max : 10 MB par image.</li>
+      </ul>
     </div>
-    <div class="form-row">
-      <button id="register" class="primary">Créer un compte</button>
-      <button id="login" class="secondary">Se connecter</button>
-    </div>
-    <p id="auth-msg" class="muted"></p>
   </div>
-
-  <div class="card" id="upload-card" style="display:none">
-    <h3>Publier un dessin</h3>
-    <input type="file" id="file">
-    <input id="title" placeholder="Titre (optionnel)">
-    <button id="upload" class="primary">Uploader</button>
-    <button id="logout" class="secondary">Déconnexion</button>
-    <p id="upload-msg" class="muted"></p>
-  </div>
-</section>
-
-<section id="page-artcommunity" class="page">
-  <h1>Art de la communauté</h1>
-  <div id="art-grid" class="art-grid"></div>
-</section>
-
-</div>
-
-<div class="side">
-  <div class="card">
-    <h3>Règles</h3>
-    <ul class="muted">
-      <li>NSFW interdit</li>
-      <li>Pas de vol d'œuvres</li>
-      <li>Max 10MB</li>
-    </ul>
-  </div>
-</div>
 </div>
 
 <footer>© 2026 Heivoli Network</footer>
 
-<!-- Firebase -->
+<!-- Firebase SDK + NSFW -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
+<script src="https://unpkg.com/nsfwjs@2.4.0/dist/nsfwjs.min.js"></script>
 
-<script>
-const firebaseConfig={
-  apiKey:"API_KEY_ICI",
-  authDomain:"PROJECT_ID.firebaseapp.com",
-  projectId:"PROJECT_ID",
-  storageBucket:"PROJECT_ID.appspot.com",
-  appId:"APP_ID"
-};
-firebase.initializeApp(firebaseConfig);
-const auth=firebase.auth();
-const db=firebase.firestore();
-const storage=firebase.storage();
-
-/* Onglets */
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected','false'));
-    btn.setAttribute('aria-selected','true');
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.getElementById('page-'+btn.dataset.page).classList.add('active');
-  }
-});
-
-/* Auth */
-register.onclick=async()=>{
-  try{
-    await auth.createUserWithEmailAndPassword(pseudo.value+"@site.com",password.value);
-    authMsg.textContent="Compte créé";
-  }catch(e){authMsg.textContent=e.message;}
-};
-login.onclick=async()=>{
-  try{
-    await auth.signInWithEmailAndPassword(pseudo.value+"@site.com",password.value);
-  }catch(e){authMsg.textContent=e.message;}
-};
-logout.onclick=()=>auth.signOut();
-
-auth.onAuthStateChanged(u=>{
-  uploadCard.style.display=u?"block":"none";
-});
-
-/* Upload */
-upload.onclick=async()=>{
-  if(!file.files[0]) return;
-  const ref=storage.ref("uploads/"+Date.now());
-  await ref.put(file.files[0]);
-  const url=await ref.getDownloadURL();
-  await db.collection("uploads").add({url,createdAt:Date.now()});
-  loadArt();
-};
-
-async function loadArt(){
-  artGrid.innerHTML="";
-  const snap=await db.collection("uploads").orderBy("createdAt","desc").get();
-  snap.forEach(d=>{
-    const img=document.createElement("img");
-    img.src=d.data().url;
-    artGrid.appendChild(img);
-  });
-}
-loadArt();
-</script>
+<!-- Ici tu mets ton script JS pour auth + upload (le script qu’on a préparé avant) -->
+<script src="script.js"></script>
 
 </body>
 </html>
